@@ -1,0 +1,83 @@
+@import url("https://fonts.googleapis.com/css2?family=Changa+One&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(
+    133deg,
+    rgba(195, 227, 211, 1) 0%,
+    rgba(223, 227, 226, 1) 100%
+  );
+  margin: 0;
+}
+
+.nav {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.title {
+  font-family: "Changa One", cursive;
+  text-transform: uppercase;
+  background-color: black;
+  color: #fff;
+  padding: 1rem;
+  margin: 0;
+  text-align: center;
+  font-size: 2rem;
+}
+
+.search-bar {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  align-items: center;
+  padding: 0rem 2rem;
+}
+
+.search-bar input {
+  font-size: 1.5rem;
+  padding: 1rem;
+  outline: 0;
+  border: 0;
+  background-color: transparent;
+  color: #000;
+  border-radius: 6rem;
+}
+
+.search-bar input:focus {
+  background-color: rgba(223, 227, 226, 0.5);
+}
+
+.search-bar input::placeholder {
+  color: #94a3b8;
+}
+
+.search-btn {
+  background-color: transparent;
+  border: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+@media screen and (min-width: 850px) {
+  .nav {
+    display: grid;
+    grid-template-columns: 25% 1fr;
+    gap: 2rem;
+  }
+
+  .search-bar {
+    max-width: 70%;
+    width: 30rem;
+    display: grid;
+    grid-template-columns: 3rem 1fr;
+    align-items: center;
+    padding: 0rem 2rem;
+  }
+}
