@@ -1,6 +1,6 @@
 import classes from "./App.module.css";
-import Footer from "./components/Footer";
-import Nav from "./components/Nav";
+import Footer from "./components/Footer/Footer";
+import Nav from "./components/Nav/Nav";
 
 function App() {
   return (
