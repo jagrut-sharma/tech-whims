@@ -1,25 +1,17 @@
 import classes from "./App.module.css";
-import { FiSearch } from "react-icons/fi";
+import Footer from "./components/Footer";
+import Nav from "./components/Nav";
 
 function App() {
   return (
     <>
-      <nav className={classes.nav}>
-        <h1 className={classes.title}>Tech Whims</h1>
-
-        <form action="#" className={classes["search-bar"]}>
-          <button className={classes["search-btn"]}>
-            <FiSearch size="2rem" />
-          </button>
-
-          <input
-            type="text"
-            name="search-bar"
-            id="search-bar-input"
-            placeholder="Search Products"
-          />
-        </form>
-      </nav>
+      <div className={classes.container}>
+        <Nav />
+        <div className={classes.body}>
+          <h1>Body</h1>
+        </div>
+        <Footer />
+      </div>
     </>
   );
 }

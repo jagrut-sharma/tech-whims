@@ -1,0 +1,132 @@
+.nav {
+  display: grid;
+  grid-template-columns: auto 1.5fr 0.5fr repeat(3, 3rem);
+  justify-items: center;
+  align-items: center;
+}
+
+.title {
+  font-family: "Changa One", cursive;
+  text-transform: uppercase;
+  background-color: black;
+  color: var(--primary-color);
+  padding: 1rem;
+  margin: 0;
+  text-align: center;
+  font-size: 2rem;
+}
+
+.short-form {
+  display: none;
+}
+
+.title:hover {
+  color: var(--secondary-color);
+}
+
+.search-bar {
+  width: 70%;
+  max-width: 80%;
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  align-items: center;
+}
+
+.search-bar input {
+  font-size: 1rem;
+  padding: 1rem;
+  outline: 0;
+  border: 0;
+  background-color: transparent;
+  color: #000;
+  border-radius: 6rem;
+}
+
+.search-bar input:focus {
+  background-color: #cbd5e1;
+}
+
+.search-bar input::placeholder {
+  color: #94a3b8;
+}
+
+.search-btn {
+  background-color: transparent;
+  border: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.explore {
+  display: inline-block;
+  text-decoration: none;
+  height: 100%;
+  padding: 1rem;
+  color: var(--secondary-color);
+  background-color: #000;
+  place-self: center;
+  font-size: 1.5rem;
+  font-family: "Changa One", cursive;
+}
+
+.explore:hover {
+  color: var(--primary-color);
+}
+
+.cart {
+  margin-right: 0.75rem;
+}
+
+@media screen and (max-width: 750px) {
+  .nav {
+    grid-template-columns: auto 1.5fr 0.5fr repeat(3, 3rem);
+  }
+
+  .title {
+    display: none;
+  }
+
+  .short-form {
+    display: block;
+  }
+
+  .search-bar {
+    width: auto;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .nav {
+    display: grid;
+    grid-template-columns: auto 1fr 0.5fr repeat(3, 2rem);
+    column-gap: 10px;
+    grid-template-rows: repeat(2, 1fr);
+    justify-items: center;
+    align-items: center;
+    row-gap: 1rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .search-bar {
+    grid-row: 2 / 3;
+    grid-column: 1 / 7;
+    place-self: center;
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 6rem;
+  }
+
+  .explore {
+    grid-column: 3 / 4;
+    font-size: 1.5rem;
+  }
+  /* .cart,
+  .user,
+  .wishlist {
+     scale: 0.9; 
+  } */
+}
