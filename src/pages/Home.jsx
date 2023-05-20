@@ -6,10 +6,12 @@ import classes from "./Home.module.css";
 export default function Home() {
   return (
     <>
-      <div className={classes.body}>
-        <h1>Body</h1>
+      <div className={classes["body-container"]}>
+        <div className={classes.body}>
+          <h1>Body</h1>
+        </div>
+        <Footer />
       </div>
-      <Footer />
     </>
   );
 }

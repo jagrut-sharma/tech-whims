@@ -5,7 +5,7 @@ export default function ErrorPage() {
   const error = useRouteError();
 
   let title = "An error occured";
-  let message = "Something went wrong";
+  let message = "You visited a wrong link";
 
   return (
     <>

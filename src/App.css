@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Changa+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap");
 
 *,
 *::after,
@@ -10,6 +11,9 @@
   --primary-color: #42944c;
   --secondary-color: #fff;
   --tertiary-color: #000;
+  --card-color: #e8f2ef;
+  --filter-bar-color: #f1f8f6;
+  --gray-shade: #64748b;
 }
 
 body {
@@ -19,4 +23,5 @@ body {
     rgba(223, 227, 226, 1) 100%
   );
   margin: 0;
+  font-family: "Montserrat", sans-serif;
 }
