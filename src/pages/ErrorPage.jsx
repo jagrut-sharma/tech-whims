@@ -7,6 +7,11 @@ export default function ErrorPage() {
   let title = "An error occured";
   let message = "You visited a wrong link";
 
+  if (error.status === 500) {
+    title = "Server Problem";
+    message = "Kuch hua hai";
+  }
+
   return (
     <>
       <h1>{title}</h1>

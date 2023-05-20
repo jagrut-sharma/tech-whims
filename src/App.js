@@ -9,6 +9,7 @@ import Login from "./pages/Login";
 import Wishlist from "./pages/Wishlist";
 import Cart from "./pages/Cart";
 import Signup from "./pages/Signup";
+import MockAPI from "./pages/Mockman/Mockman";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: "signup",
         element: <Signup />,
+      },
+      {
+        path: "mockman",
+        element: <MockAPI />,
       },
     ],
   },
