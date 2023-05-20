@@ -1,19 +1,19 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 import classes from "./AuthForm.module.css";
 
 export default function AuthForm() {
-  const location = useLocation();
-  const isSignIn = location.pathname === "/login";
+  const [searchParams] = useSearchParams();
+  const isSignup = searchParams.get("mode") === "signup";
 
   return (
     <>
       <main className={classes["main-container"]}>
         <form action="" className={classes.form}>
-          <h2>{isSignIn ? "Sign In" : "Signup"}</h2>
+          <h2>{isSignup ? "Signup" : "Sign In"}</h2>
 
-          {!isSignIn && (
+          {isSignup && (
             <div className={classes["input-container"]}>
               <label htmlFor="user-email">Name:</label>
               <input
@@ -40,31 +40,29 @@ export default function AuthForm() {
             <input type="text" name="pwd" id="pwd" placeholder="Password" />
           </div>
 
-          {!isSignIn && (
+          {isSignup && (
             <div className={classes["input-container"]}>
               <label htmlFor="cnfm-pwd">Confirm Password:</label>
               <input
                 type="text"
-                name="cnfm-pwd"
-                id="cnfm-pwd"
+                name="cnfrm-pwd"
+                id="cnfrm-pwd"
                 placeholder="Confirm Password"
               />
             </div>
           )}
 
-          {isSignIn && <button>Login</button>}
+          {!isSignup && <button>Login</button>}
 
-          {isSignIn && <button>Guest Login</button>}
+          {!isSignup && <button>Guest Login</button>}
 
-          {!isSignIn && <button>Create Account</button>}
+          {isSignup && <button>Create Account</button>}
 
           <p>
             Don't have an account?{" "}
-            {isSignIn ? (
-              <Link to={"/signup"}>Signup</Link>
-            ) : (
-              <Link to={"/login"}>Login</Link>
-            )}
+            <Link to={`?mode=${isSignup ? "login" : "signup"}`}>
+              {isSignup ? "Login" : "Signup"}
+            </Link>
           </p>
         </form>
       </main>
