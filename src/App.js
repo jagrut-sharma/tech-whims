@@ -1,19 +1,46 @@
-import classes from "./App.module.css";
-import Footer from "./components/Footer/Footer";
-import Nav from "./components/Nav/Nav";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+
+import "./App.css";
+import RootLayout from "./pages/RootLayout";
+import ErrorPage from "./pages/ErrorPage";
+import Home from "./pages/Home";
+import Products from "./pages/Products";
+import Login from "./pages/Login";
+import Wishlist from "./pages/Wishlist";
+import Cart from "./pages/Cart";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <RootLayout />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        index: true,
+        element: <Home />,
+      },
+      {
+        path: "products",
+        element: <Products />,
+      },
+      {
+        path: "login",
+        element: <Login />,
+      },
+      {
+        path: "wishlist",
+        element: <Wishlist />,
+      },
+      {
+        path: "cart",
+        element: <Cart />,
+      },
+    ],
+  },
+]);
 
 function App() {
-  return (
-    <>
-      <div className={classes.container}>
-        <Nav />
-        <div className={classes.body}>
-          <h1>Body</h1>
-        </div>
-        <Footer />
-      </div>
-    </>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

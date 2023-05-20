@@ -20,15 +20,3 @@ body {
   );
   margin: 0;
 }
-
-.container {
-  display: grid;
-  grid-template-rows: auto 1fr 3rem;
-  height: 100vh;
-}
-
-.body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
