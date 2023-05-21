@@ -22,7 +22,6 @@ export default function AuthForm({ handleFormSubmit, err }) {
 
   const handleSumbit = (e) => {
     e.preventDefault();
-    console.log("In handle submit");
     if (isSignup) {
       handleFormSubmit(formData);
     } else {

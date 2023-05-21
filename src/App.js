@@ -9,6 +9,7 @@ import Authentication from "./pages/Authentication";
 import Wishlist from "./pages/Wishlist";
 import Cart from "./pages/Cart";
 import MockAPI from "./pages/Mockman/Mockman";
+import RequireAuth from "./components/RequireAuth";
 
 const router = createBrowserRouter([
   {
@@ -30,13 +31,20 @@ const router = createBrowserRouter([
       },
       {
         path: "wishlist",
-        element: <Wishlist />,
+        element: (
+          <RequireAuth>
+            <Wishlist />
+          </RequireAuth>
+        ),
       },
       {
         path: "cart",
-        element: <Cart />,
+        element: (
+          <RequireAuth>
+            <Cart />
+          </RequireAuth>
+        ),
       },
-
       {
         path: "mockman",
         element: <MockAPI />,

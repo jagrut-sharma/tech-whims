@@ -1,15 +1,20 @@
 import React, { useState } from "react";
-import AuthForm from "../components/Auth/AuthForm";
+import AuthForm from "../components/AuthForm/AuthForm";
 import axios from "axios";
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import UserProfile from "./UserProfile";
 
 export default function Authentication() {
   const [error, setError] = useState(null);
   const [searchParams] = useSearchParams();
   const mode = searchParams.get("mode") || "login";
   const baseURL = `/api/auth/${mode}`;
-  const { handleLogin } = useAuth();
+  const { token, handleLogin } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const redirectPath = location.state?.path || "/";
 
   const handleFormSubmit = async (formValue) => {
     try {
@@ -20,15 +25,25 @@ export default function Authentication() {
       } = res;
 
       handleLogin(encodedToken);
+      navigate(redirectPath, { replace: true });
     } catch (err) {
-      console.log("In catch");
-      setError("No user Found, please signup");
+      // console.log("In catch");
+      // console.log(err);
+      if (err.response.status === 422) {
+        setError("User already exists. Please login");
+      } else {
+        setError("No user Found, please signup");
+      }
     }
   };
 
   return (
     <>
-      <AuthForm handleFormSubmit={handleFormSubmit} err={error} />
+      {token ? (
+        <UserProfile />
+      ) : (
+        <AuthForm handleFormSubmit={handleFormSubmit} err={error} />
+      )}
     </>
   );
 }
