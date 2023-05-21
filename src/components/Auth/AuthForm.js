@@ -15,12 +15,13 @@ export default function AuthForm() {
 
           {isSignup && (
             <div className={classes["input-container"]}>
-              <label htmlFor="user-email">Name:</label>
+              <label htmlFor="username">Name:</label>
               <input
                 type="text"
                 name="username"
                 id="username"
                 placeholder="John Doe"
+                required
               />
             </div>
           )}
@@ -39,18 +40,6 @@ export default function AuthForm() {
             <label htmlFor="pwd">Password:</label>
             <input type="text" name="pwd" id="pwd" placeholder="Password" />
           </div>
-
-          {isSignup && (
-            <div className={classes["input-container"]}>
-              <label htmlFor="cnfm-pwd">Confirm Password:</label>
-              <input
-                type="text"
-                name="cnfrm-pwd"
-                id="cnfrm-pwd"
-                placeholder="Confirm Password"
-              />
-            </div>
-          )}
 
           {!isSignup && <button>Login</button>}
 

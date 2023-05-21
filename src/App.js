@@ -5,10 +5,9 @@ import RootLayout from "./pages/RootLayout";
 import ErrorPage from "./pages/ErrorPage";
 import Home from "./pages/Home";
 import Products from "./pages/Products";
-import Login from "./pages/Login";
+import Authentication from "./pages/Authentication";
 import Wishlist from "./pages/Wishlist";
 import Cart from "./pages/Cart";
-import Signup from "./pages/Signup";
 import MockAPI from "./pages/Mockman/Mockman";
 
 const router = createBrowserRouter([
@@ -26,8 +25,8 @@ const router = createBrowserRouter([
         element: <Products />,
       },
       {
-        path: "login",
-        element: <Login />,
+        path: "auth",
+        element: <Authentication />,
       },
       {
         path: "wishlist",
@@ -37,10 +36,7 @@ const router = createBrowserRouter([
         path: "cart",
         element: <Cart />,
       },
-      {
-        path: "signup",
-        element: <Signup />,
-      },
+
       {
         path: "mockman",
         element: <MockAPI />,

@@ -34,7 +34,7 @@ export default function Nav() {
         <Link to={"/products"} className={classes.explore}>
           Explore
         </Link>
-        <Link to={"/login"} className={classes.user}>
+        <Link to={"/auth"} className={classes.user}>
           <FaUserCircle size={"1.5rem"} color="#000" />
         </Link>
         <Link to={"/wishlist"} className={classes.wishlist}>

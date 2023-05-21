@@ -21,6 +21,7 @@
   color: var(--primary-color);
   font-weight: bold;
   font-family: inherit;
+  cursor: pointer;
 }
 
 .form button:nth-of-type(2) {
