@@ -67,3 +67,8 @@
 .input-container input:focus {
   border: 1px solid var(--primary-color);
 }
+
+.error {
+  color: red;
+  font-weight: 600;
+}
