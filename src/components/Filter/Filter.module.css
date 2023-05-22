@@ -1,0 +1,27 @@
+.product-container {
+  display: grid;
+  grid-template-columns: 13rem 1fr;
+  height: 100%;
+}
+
+.filter-container {
+  /* background-color: #f1f6f5; */
+  background-color: var(--filter-bar-color);
+}
+
+.filter-container .filter-heading {
+  padding: 0 1rem;
+  margin: 0;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.clear-filter {
+  background-color: #000;
+  color: var(--primary-color);
+  font-weight: bold;
+  /* padding: 0; */
+  /* border-radius: 5px; */
+}

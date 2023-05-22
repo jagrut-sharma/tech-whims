@@ -1,9 +1,10 @@
 import React from "react";
+import Filter from "../components/Filter/Filter";
 
 export default function Products() {
   return (
     <div>
-      <h1>Products</h1>
+      <Filter />
     </div>
   );
 }
