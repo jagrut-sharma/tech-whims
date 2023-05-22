@@ -76,7 +76,7 @@
 }
 
 @media (hover: hover) {
-  .title:hover {
+  .title a:hover {
     color: var(--secondary-color);
   }
 

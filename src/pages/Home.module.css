@@ -6,6 +6,79 @@
 
 .body {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+}
+
+.hero-img {
+  width: 100%;
+  /* padding: 1rem; */
+}
+
+.section {
+  position: relative;
+}
+
+.shop-btn:hover {
+  color: var(--secondary-color);
+}
+
+.body h2 {
+  position: relative;
+  margin: 0.5rem;
+  padding: 10px 40px;
+  text-align: center;
+  background-color: #400480;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  color: #42944c;
+}
+
+.body h2::before,
+.body h2::after {
+  content: "";
+  width: 80px;
+  height: 100%;
+  background-color: #400480;
+
+  /* position ribbon ends behind and slightly lower */
+  position: absolute;
+  z-index: -1;
+  top: 20px;
+
+  /* clip ribbon end shape */
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 25% 50%);
+
+  /* draw and position the folded ribbon bit */
+  background-image: linear-gradient(45deg, transparent 50%, #5d3922 50%);
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  background-position: bottom right;
+}
+
+.body h2::before {
+  left: -60px;
+}
+
+.body h2::after {
+  right: -60px;
+  transform: scaleX(-1); /* flip horizontally */
+}
+
+.category-card-container {
+  margin: 3rem 0 2rem;
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+@media screen and (max-width: 600px) {
+  .section {
+    margin: 1rem 0;
+  }
+
+  .category-card-container {
+    margin: 2rem 0;
+  }
 }

@@ -1,0 +1,29 @@
+.category-card {
+  text-align: center;
+  background-color: var(--card-color);
+  padding: 1rem 2rem;
+  /* border: 3px solid var(--fourth-color); */
+  border: 3px solid var(--primary-color);
+  margin: 1rem 0;
+}
+
+.category-card p {
+  margin: 0;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.card-img {
+  width: 10rem;
+  transition: all 0.3s ease;
+}
+
+.active-card-img {
+  filter: blur(5px);
+}
+
+@media (hover: hover) {
+  .card-img:hover {
+    transform: scale(1.1);
+  }
+}
