@@ -1,0 +1,12 @@
+.error-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.error-container p {
+  width: 20rem;
+  text-align: justify;
+}
