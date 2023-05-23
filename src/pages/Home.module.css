@@ -17,6 +17,7 @@
 
 .section {
   position: relative;
+  width: 100%;
 }
 
 .shop-btn:hover {
