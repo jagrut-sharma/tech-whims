@@ -8,14 +8,18 @@ const AuthContext = createContext({
 
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(null);
+  const [name, setName] = useState(null);
 
-  const handleLogin = (token) => {
+  const handleLogin = (token, name) => {
     setToken(token);
+    console.log(name);
+    setName(name);
     localStorage.setItem("token", token);
   };
 
   const handleLogout = () => {
     setToken(null);
+    setName(null);
     localStorage.removeItem("token");
   };
 
@@ -23,6 +27,7 @@ export const AuthProvider = ({ children }) => {
     token,
     handleLogin,
     handleLogout,
+    name,
   };
 
   return (

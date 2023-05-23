@@ -3,8 +3,9 @@ import { Link, useSearchParams } from "react-router-dom";
 
 import classes from "./AuthForm.module.css";
 import { useImmer } from "use-immer";
+import { guestUser } from "../../utils/contants";
 
-export default function AuthForm({ handleFormSubmit, err }) {
+export default function AuthForm({ handleFormSubmit, err, setErr }) {
   const [searchParams] = useSearchParams();
   const isSignup = searchParams.get("mode") === "signup";
 
@@ -12,16 +13,19 @@ export default function AuthForm({ handleFormSubmit, err }) {
     name: "",
     email: "",
     password: "",
+    confirmPassword: "",
   });
 
   const handleChange = (e) => {
     setFormData((draft) => {
       draft[e.target.name] = e.target.value;
     });
+    setErr("");
   };
 
   const handleSumbit = (e) => {
     e.preventDefault();
+
     if (isSignup) {
       handleFormSubmit(formData);
     } else {
@@ -33,9 +37,16 @@ export default function AuthForm({ handleFormSubmit, err }) {
   };
 
   const handleGuestLogin = () => {
-    handleFormSubmit({
-      email: "adarshbalika@gmail.com",
-      password: "adarshbalika",
+    handleFormSubmit(guestUser);
+  };
+
+  const handleModeSwitch = () => {
+    setErr("");
+    setFormData({
+      name: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
     });
   };
 
@@ -88,6 +99,21 @@ export default function AuthForm({ handleFormSubmit, err }) {
             />
           </div>
 
+          {isSignup && (
+            <div className={classes["input-container"]}>
+              <label htmlFor="cnf-pwd">Password:</label>
+              <input
+                type="text"
+                name="confirmPassword"
+                id="cnf-pwd"
+                placeholder="Confirm Password"
+                onChange={handleChange}
+                value={formData.confirmPassword}
+                required
+              />
+            </div>
+          )}
+
           {!isSignup && <button>Login</button>}
 
           {!isSignup && (
@@ -100,7 +126,10 @@ export default function AuthForm({ handleFormSubmit, err }) {
 
           <p>
             Don't have an account?{" "}
-            <Link to={`?mode=${isSignup ? "login" : "signup"}`}>
+            <Link
+              to={`?mode=${isSignup ? "login" : "signup"}`}
+              onClick={handleModeSwitch}
+            >
               {isSignup ? "Login" : "Signup"}
             </Link>
           </p>

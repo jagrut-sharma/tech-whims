@@ -34,7 +34,9 @@ export default function Home() {
               />
             </Link>
           </section>
-          <h2>Shop by Categories</h2>
+          <div className={classes["categories-label"]}>
+            <h2>Shop by Categories</h2>
+          </div>
           <div className={classes["category-card-container"]}>
             {categories.map((category) => (
               <Category key={category._id} {...category} />
