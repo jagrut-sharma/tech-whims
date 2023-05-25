@@ -7,6 +7,8 @@ import axios from "axios";
 const DataContext = createContext({
   categories: [],
   productsList: [],
+  wishlist: [],
+  cart: [],
 });
 
 const initialData = {

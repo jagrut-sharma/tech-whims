@@ -17,7 +17,12 @@ export default function Nav() {
             Tech Whims
           </Link>{" "}
         </h1>
-        <h1 className={`${classes.title} ${classes["short-form"]}`}>TW</h1>
+        <h1 className={`${classes.title} ${classes["short-form"]}`}>
+          {" "}
+          <Link to={"/"} className={classes.link}>
+            TW
+          </Link>
+        </h1>
 
         <form action="#" className={classes["search-bar"]}>
           <button className={classes["search-btn"]}>
