@@ -58,3 +58,9 @@ function App() {
 }
 
 export default App;
+
+// review k
+// add to cart bold
+// try-catch password !== confirm password -toast
+// Money in indian format
+// tell harsh about navigate.

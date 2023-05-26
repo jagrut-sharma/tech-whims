@@ -2,6 +2,18 @@
   display: grid;
   grid-template-columns: 13rem 1fr;
   height: 100%;
+  position: relative;
+}
+
+main .product-number {
+  text-align: center;
+}
+
+.product-card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  place-items: center;
+  grid-gap: 1rem;
 }
 
 @media screen and (max-width: 750px) {

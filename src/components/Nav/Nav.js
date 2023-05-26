@@ -36,18 +36,24 @@ export default function Nav() {
             placeholder="Search Products"
           />
         </form>
+
         <Link to={"/products"} className={classes.explore}>
           Explore
         </Link>
-        <Link to={"/auth"} className={classes.user}>
-          <FaUserCircle size={"1.5rem"} color="#000" />
-        </Link>
-        <Link to={"/wishlist"} className={classes.wishlist}>
-          <BsBagHeart size={"1.5rem"} color="#42944c" />
-        </Link>
-        <Link to={"/cart"} className={classes.cart}>
-          <FaShoppingCart size={"1.5rem"} color="#42944c" />
-        </Link>
+
+        <div className={classes["icon-links"]}>
+          <Link to={"/auth"} className={classes.user}>
+            <FaUserCircle size={"1.5rem"} color="#000" />
+          </Link>
+
+          <Link to={"/wishlist"} className={classes.wishlist}>
+            <BsBagHeart size={"1.5rem"} color="#42944c" />
+          </Link>
+
+          <Link to={"/cart"} className={classes.cart}>
+            <FaShoppingCart size={"1.5rem"} color="#42944c" />
+          </Link>
+        </div>
       </nav>
     </>
   );

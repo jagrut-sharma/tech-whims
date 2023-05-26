@@ -3,6 +3,11 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+  position: fixed;
+  z-index: 999;
+  width: 13rem;
+  top: 4rem;
+  left: 0;
 }
 
 .filter-container .filter-heading {
@@ -188,6 +193,11 @@
     font-size: 1.3rem;
   }
 
+  .price-slider::-webkit-slider-thumb {
+    width: 18px;
+    height: 18px;
+  }
+
   .filter-indicator p {
     font-size: 1rem;
   }
@@ -209,11 +219,11 @@
     top: 100%;
     width: 100%;
     transform: scale(1, 1);
-    opacity: 1;
-    transition: all 250ms ease-in-out 250ms;
-    transition: transform 400ms ease-in-out;
+    transition: transform 300ms ease-in-out;
     transform-origin: top;
+    height: calc(100vh - 132px - 72px);
     background-color: var(--filter-bar-color);
+    overflow-y: scroll;
   }
 
   .responsive-container-not-visible {
@@ -221,8 +231,23 @@
     top: 100%;
     width: 100%;
     transform: scale(1, 0);
-    /* opacity: 0; */
-    /* background-color: var(--filter-bar-color); */
+    transition: transform 200ms ease-in-out;
+    transform-origin: top;
+    background-color: var(--filter-bar-color);
+  }
+
+  .responsive-container-not-visible .slider-container,
+  .responsive-container-not-visible .sub-filter-container,
+  .responsive-container-not-visible .responsive-btn-container {
+    opacity: 0;
+    /* transition: opacity 100ms ease-in-out; */
+  }
+
+  .responsive-container-visible .slider-container,
+  .responsive-container-visible .sub-filter-container,
+  .responsive-container-visible .responsive-btn-container {
+    opacity: 1;
+    transition: opacity 250ms ease-in-out 250ms;
   }
 
   .arrow-visible {
@@ -231,5 +256,15 @@
   }
   .arrow-not-visible {
     transition: all 0.3s ease;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .filter-container {
+    position: fixed;
+    z-index: 999;
+    width: 100%;
+    height: auto;
+    top: 8.3rem;
   }
 }
