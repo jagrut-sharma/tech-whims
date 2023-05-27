@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 
-import Nav from "../components/Nav/Nav";
+import Nav from "../../components/Nav/Nav";
 import classes from "./RootLayout.module.css";
 
 export default function RootLayout() {

@@ -1,11 +1,11 @@
 import React from "react";
 
-import Footer from "../components/Footer/Footer";
+import Footer from "../../components/Footer/Footer";
 import classes from "./Home.module.css";
-import { useDataContext } from "../context/DataContext";
-import ErrorElement from "../components/ErrorEle/ErrorElement";
+import { useDataContext } from "../../context/DataContext";
+import ErrorElement from "../../components/ErrorEle/ErrorElement";
 import { Link } from "react-router-dom";
-import Category from "../components/Category/Category";
+import Category from "../../components/Category/Category";
 
 export default function Home() {
   const {

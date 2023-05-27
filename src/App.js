@@ -1,16 +1,18 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import "./App.css";
-import RootLayout from "./pages/RootLayout";
-import ErrorPage from "./pages/ErrorPage";
-import Home from "./pages/Home";
-import Products from "./pages/Products";
-import Authentication from "./pages/Authentication";
-import Wishlist from "./pages/Wishlist";
-import Cart from "./pages/Cart";
+import RootLayout from "./pages/RootLayout/RootLayout";
+import ErrorPage from "./pages/Error Page/ErrorPage";
+import Home from "./pages/HomePage/Home";
+import Products from "./pages/ProductPage/Products";
+import Authentication from "./pages/Authentication/Authentication";
+import Wishlist from "./pages/Wishlist/Wishlist";
+import Cart from "./pages/Cart/Cart";
 import MockAPI from "./pages/Mockman/Mockman";
 import RequireAuth from "./components/RequireAuth";
-import UserProfile from "./pages/UserProfile";
+import UserProfile from "./pages/UserProfile/UserProfile";
+import ProductDetail from "./pages/ProductDetails/ProductDetail";
+import ProductRootLayout from "./pages/ProductRoot/ProductRootLayout";
 
 const router = createBrowserRouter([
   {
@@ -24,7 +26,17 @@ const router = createBrowserRouter([
       },
       {
         path: "products",
-        element: <Products />,
+        element: <ProductRootLayout />,
+        children: [
+          {
+            index: true,
+            element: <Products />,
+          },
+          {
+            path: ":productID",
+            element: <ProductDetail />,
+          },
+        ],
       },
       {
         path: "auth",

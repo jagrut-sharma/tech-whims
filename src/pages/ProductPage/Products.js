@@ -1,23 +1,26 @@
 import React from "react";
 
 import classes from "./Products.module.css";
-import Filter from "../components/Filter/Filter";
-import { useDataContext } from "../context/DataContext";
-import ProductCard from "../components/ProductCard/ProductCard";
+import Filter from "../../components/Filter/Filter";
+import { useDataContext } from "../../context/DataContext";
+import ProductCard from "../../components/ProductCard/ProductCard";
+import ErrorElement from "../../components/ErrorEle/ErrorElement";
 
 export default function Products() {
   const {
     dataState: { productsList },
+    loader,
+    isError,
   } = useDataContext();
 
-  console.log(productsList);
-
-  return (
+  const productEle = isError ? (
+    <ErrorElement statusCode={"404"} message={isError.message} />
+  ) : (
     <div className={classes["product-container"]}>
       <Filter />
       <main>
         <p className={classes["product-number"]}>
-          Showing {productsList.length} Products
+          {loader ? "Loading...." : `Showing ${productsList.length} Products`}
         </p>
         <div className={classes["product-card-container"]}>
           {productsList.map((product) => (
@@ -27,4 +30,6 @@ export default function Products() {
       </main>
     </div>
   );
+
+  return <>{productEle}</>;
 }

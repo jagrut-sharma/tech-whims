@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import AuthForm from "../components/AuthForm/AuthForm";
+import AuthForm from "../../components/AuthForm/AuthForm";
 import axios from "axios";
 import {
   Navigate,
@@ -7,7 +7,7 @@ import {
   useNavigate,
   useSearchParams,
 } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../../context/AuthContext";
 // import UserProfile from "./UserProfile";
 
 export default function Authentication() {

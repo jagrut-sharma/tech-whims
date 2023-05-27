@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 
 export default function ProductCard(product) {
   const {
+    _id,
     name,
     image,
     inStock,
@@ -29,7 +30,7 @@ export default function ProductCard(product) {
         inStock ? "" : classes["out-of-stock"]
       }`}
     >
-      <Link>
+      <Link to={`/products/${_id}`}>
         <img src={image} alt={name} />
         <p className={classes["product-name"]}>{name}</p>
         <span>{company[0].toUpperCase() + company.slice(1)}</span>
