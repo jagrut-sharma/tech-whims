@@ -17,6 +17,12 @@ export default function ProductCard(product) {
     company,
   } = product;
 
+  const formattedPrice = price.toLocaleString("en-IN", {
+    style: "currency",
+    currency: "INR",
+    maximumFractionDigits: 0,
+  });
+
   return (
     <div
       className={`${classes["product-card"]} ${
@@ -29,7 +35,7 @@ export default function ProductCard(product) {
         <span>{company[0].toUpperCase() + company.slice(1)}</span>
         <div className={classes["price-container"]}>
           <p>
-            {price} <span>{originalPrice}</span>
+            {formattedPrice} <span>{originalPrice}</span>
           </p>
           <p className={classes["discount-label"]}>
             {`(${Math.floor(
@@ -42,7 +48,11 @@ export default function ProductCard(product) {
             <span>{stars}</span>
             <AiFillStar color="#fff" />
           </div>
-          <span>{`(${reviewCount})`}</span>
+          <span>{`(${
+            reviewCount > 1000
+              ? (reviewCount / 1000).toFixed(1) + "k"
+              : reviewCount
+          })`}</span>
         </div>
       </Link>
       <button className={classes["cart-btn"]}>Add to Cart</button>

@@ -10,6 +10,8 @@ export default function Products() {
     dataState: { productsList },
   } = useDataContext();
 
+  console.log(productsList);
+
   return (
     <div className={classes["product-container"]}>
       <Filter />
