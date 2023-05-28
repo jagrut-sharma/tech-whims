@@ -24,7 +24,16 @@ export default function Nav() {
           </Link>
         </h1>
 
-        <form action="#" className={classes["search-bar"]}>
+        <div className={classes["search-bar"]}>
+          <input
+            type="search"
+            name="search-bar"
+            id="search-bar-input"
+            placeholder="Search Products"
+          />
+        </div>
+
+        {/* <form action="#" className={classes["search-bar"]}>
           <button className={classes["search-btn"]}>
             <FiSearch size="1.5rem" />
           </button>
@@ -35,7 +44,7 @@ export default function Nav() {
             id="search-bar-input"
             placeholder="Search Products"
           />
-        </form>
+        </form> */}
 
         <Link to={"/products"} className={classes.explore}>
           Explore

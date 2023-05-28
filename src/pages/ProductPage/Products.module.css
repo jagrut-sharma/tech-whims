@@ -5,6 +5,10 @@
   position: relative;
 }
 
+.product-container main {
+  margin: 0 0.5rem;
+}
+
 main .product-number {
   text-align: center;
 }
