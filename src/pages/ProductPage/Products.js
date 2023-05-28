@@ -13,14 +13,20 @@ export default function Products() {
     isError,
   } = useDataContext();
 
+  const totalProducts = productsList.reduce(
+    (acc, { inStock }) => (inStock ? acc + 1 : acc),
+    0
+  );
+
   const productEle = isError ? (
     <ErrorElement statusCode={"404"} message={isError.message} />
   ) : (
     <div className={classes["product-container"]}>
       <Filter />
+
       <main>
         <p className={classes["product-number"]}>
-          {loader ? "Loading...." : `Showing ${productsList.length} Products`}
+          {loader ? "Loading...." : `Showing ${totalProducts} Products`}
         </p>
         <div className={classes["product-card-container"]}>
           {productsList.map((product) => (

@@ -5,6 +5,7 @@ import App from "./App";
 import { makeServer } from "./server";
 import { AuthProvider } from "./context/AuthContext";
 import { DataProvider } from "./context/DataContext";
+import { FilterProvider } from "./context/FilterContext";
 
 // Call make Server
 makeServer();
@@ -15,7 +16,9 @@ root.render(
   <StrictMode>
     <AuthProvider>
       <DataProvider>
-        <App />
+        <FilterProvider>
+          <App />
+        </FilterProvider>
       </DataProvider>
     </AuthProvider>
   </StrictMode>

@@ -5,10 +5,12 @@ import { useImmerReducer } from "use-immer";
 import axios from "axios";
 
 const DataContext = createContext({
-  categories: [],
-  productsList: [],
-  wishlist: [],
-  cart: [],
+  dataState: {},
+  dataDispatch: () => {},
+  loader: null,
+  setLoader: () => {},
+  isError: null,
+  setIsError: () => {},
 });
 
 const initialData = {
@@ -28,12 +30,15 @@ export const DataProvider = ({ children }) => {
       const {
         data: { categories },
       } = await axios.get("/api/categories");
-      dataDispatch({ type: ACTIONS.ADD_CATEGORIES, payload: categories });
+      dataDispatch({
+        type: ACTIONS.INITIALIZE_CATEGORIES,
+        payload: categories,
+      });
 
       const {
         data: { products },
       } = await axios.get("/api/products");
-      dataDispatch({ type: ACTIONS.ADD_PRODUCTS, payload: products });
+      dataDispatch({ type: ACTIONS.INITIALIZE_PRODUCTS, payload: products });
       setLoader(false);
     } catch (err) {
       console.log(err);

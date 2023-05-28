@@ -2,11 +2,26 @@ import React from "react";
 
 import classes from "./Filter.module.css";
 import { useDataContext } from "../../context/DataContext";
+import { useFilter } from "../../context/FilterContext";
+import { ACTIONS } from "../../utils/actions";
 
 export default function CategoryFilter() {
   const {
     dataState: { categories },
   } = useDataContext();
+
+  const {
+    appliedFilterValue: { category: categoryFilter },
+    filterDispatch,
+  } = useFilter();
+
+  const handleChange = (e) => {
+    filterDispatch({
+      type: ACTIONS.FILTER_CATEGORY,
+      payload: { categoryName: e.target.name, isChecked: e.target.checked },
+    });
+  };
+
   return (
     <>
       <div className={classes["sub-filter-container"]}>
@@ -21,6 +36,8 @@ export default function CategoryFilter() {
                 type="checkbox"
                 name={category.categoryName}
                 id={category.categoryName}
+                onChange={handleChange}
+                checked={categoryFilter.includes(category.categoryName)}
               />
               <label htmlFor={category.categoryName}>
                 {category.categoryName}

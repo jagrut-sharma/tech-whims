@@ -1,10 +1,17 @@
 import React from "react";
 
 import classes from "./Filter.module.css";
+import { useFilter } from "../../context/FilterContext";
+import { ACTIONS } from "../../utils/actions";
 
 export default function PriceFilter() {
+  const {
+    appliedFilterValue: { price },
+    filterDispatch,
+  } = useFilter();
+
   const handleSliderChange = (e) => {
-    // console.log(e.target.value);
+    filterDispatch({ type: ACTIONS.FILTER_PRICE, payload: e.target.value });
   };
 
   return (
@@ -23,6 +30,8 @@ export default function PriceFilter() {
           className={classes["price-slider"]}
           min={30}
           max={120}
+          step={10}
+          value={price}
           onChange={handleSliderChange}
         />
       </div>

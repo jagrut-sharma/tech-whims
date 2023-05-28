@@ -133,6 +133,11 @@
   cursor: pointer;
 }
 
+.rating-container span {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
 .sort-filter {
   padding-bottom: 0.5rem;
   font-size: 0.9rem;

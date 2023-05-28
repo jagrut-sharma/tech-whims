@@ -7,9 +7,17 @@ import RatingsFilter from "./RatingsFilter";
 import PriceFilter from "./PriceFilter";
 import CategoryFilter from "./CategoryFilter";
 import SortFilter from "./SortFilter";
+import { useFilter } from "../../context/FilterContext";
+import { ACTIONS } from "../../utils/actions";
 
 export default function Filter() {
   const [isFilterVisible, setIsFilterVisible] = useState(false);
+  const { filterDispatch } = useFilter();
+
+  const handleClear = () => {
+    filterDispatch({ type: ACTIONS.FILTER_CLEAR_FILTER });
+    setIsFilterVisible(false);
+  };
 
   return (
     <div>
@@ -32,7 +40,9 @@ export default function Filter() {
 
         <div className={classes["filter-heading"]}>
           <h3>Filters</h3>
-          <Link className={classes["clear-filter"]}>Clear</Link>
+          <Link className={classes["clear-filter"]} onClick={handleClear}>
+            Clear
+          </Link>
         </div>
 
         <div
@@ -51,8 +61,19 @@ export default function Filter() {
           <SortFilter />
 
           <div className={classes["responsive-btn-container"]}>
-            <button className={classes["responsive-filter-btn"]}>Apply</button>
-            <button className={classes["responsive-filter-btn"]}>Clear</button>
+            <button
+              className={classes["responsive-filter-btn"]}
+              onClick={() => setIsFilterVisible(false)}
+            >
+              Apply
+            </button>
+
+            <button
+              className={classes["responsive-filter-btn"]}
+              onClick={handleClear}
+            >
+              Clear
+            </button>
           </div>
         </div>
       </aside>

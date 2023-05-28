@@ -1,14 +1,24 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FiSearch } from "react-icons/fi";
 import { FaUserCircle } from "react-icons/fa";
 import { FaShoppingCart } from "react-icons/fa";
 // import { BsFillBookmarkHeartFill } from "react-icons/bs";
 import { BsBagHeart } from "react-icons/bs";
 
 import classes from "./Nav.module.css";
+import { useFilter } from "../../context/FilterContext";
+import { ACTIONS } from "../../utils/actions";
 
 export default function Nav() {
+  const {
+    appliedFilterValue: { search },
+    filterDispatch,
+  } = useFilter();
+
+  const handleInputChange = (e) => {
+    filterDispatch({ type: ACTIONS.FILTER_SEARCH, payload: e.target.value });
+  };
+
   return (
     <>
       <nav className={classes.nav}>
@@ -30,6 +40,8 @@ export default function Nav() {
             name="search-bar"
             id="search-bar-input"
             placeholder="Search Products"
+            value={search}
+            onChange={handleInputChange}
           />
         </div>
 
