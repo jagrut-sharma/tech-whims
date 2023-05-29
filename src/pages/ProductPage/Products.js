@@ -5,6 +5,8 @@ import Filter from "../../components/Filter/Filter";
 import { useDataContext } from "../../context/DataContext";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import ErrorElement from "../../components/ErrorEle/ErrorElement";
+import { getFilteredProducts } from "../../utils/getFilteredProducts";
+import { useFilter } from "../../context/FilterContext";
 
 export default function Products() {
   const {
@@ -13,7 +15,14 @@ export default function Products() {
     isError,
   } = useDataContext();
 
-  const totalProducts = productsList.reduce(
+  const { appliedFilterValue } = useFilter();
+
+  const filteredProductsList = getFilteredProducts(
+    productsList,
+    appliedFilterValue
+  );
+
+  const totalProducts = filteredProductsList.reduce(
     (acc, { inStock }) => (inStock ? acc + 1 : acc),
     0
   );
@@ -29,7 +38,7 @@ export default function Products() {
           {loader ? "Loading...." : `Showing ${totalProducts} Products`}
         </p>
         <div className={classes["product-card-container"]}>
-          {productsList.map((product) => (
+          {filteredProductsList.map((product) => (
             <ProductCard {...product} key={product._id} />
           ))}
         </div>
