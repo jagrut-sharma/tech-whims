@@ -16,6 +16,7 @@
   --card-color: #e8f2ef;
   --filter-bar-color: #f1f8f6;
   --gray-shade: #64748b;
+  --light-purple: rgb(154, 128, 197);
 }
 
 body {
@@ -28,7 +29,3 @@ body {
   font-family: "Montserrat", sans-serif;
   height: 100vh;
 }
-
-/* #root {
-  height: 100%;
-} */

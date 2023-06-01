@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { dataReducer } from "../reducer/reducer";
+
+import { dataReducer, initialData } from "../reducer/reducer";
 import { ACTIONS } from "../utils/actions";
 import { useImmerReducer } from "use-immer";
 import axios from "axios";
@@ -13,10 +14,13 @@ const DataContext = createContext({
   setIsError: () => {},
 });
 
-const initialData = {
-  categories: [],
-  productsList: [],
-};
+// export const initialData = {
+//   categories: [],
+//   productsList: [],
+//   wishlist: [],
+//   cartList: [],
+//   addressList: [],
+// };
 
 export const DataProvider = ({ children }) => {
   const [dataState, dataDispatch] = useImmerReducer(dataReducer, initialData);

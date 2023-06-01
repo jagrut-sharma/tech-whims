@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { BsFillStarFill } from "react-icons/bs";
 import { AiFillHeart } from "react-icons/ai";
 
@@ -7,11 +7,25 @@ import { productFetch } from "../../services/productDetailService";
 import { useDataContext } from "../../context/DataContext";
 import ErrorElement from "../../components/ErrorEle/ErrorElement";
 import classes from "./ProductDetail.module.css";
+import { isPresentInCart, isPresentInWishlist } from "../../utils/productUtils";
+import { useAuth } from "../../context/AuthContext";
+import {
+  addToWishlist,
+  removeFromWishlist,
+} from "../../services/wishlistService";
+import { addToCart } from "../../services/cartServices";
 
 export default function ProductDetail() {
   const { productID } = useParams();
   const [product, setProduct] = useState(null);
+  const [isDisabled, setIsDisabled] = useState(false);
   const { isError, setIsError } = useDataContext();
+  const {
+    dataDispatch,
+    dataState: { wishlist, cartList },
+  } = useDataContext();
+  const { token } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     productFetch(productID, setProduct, setIsError);
@@ -31,8 +45,12 @@ export default function ProductDetail() {
     price,
     reviewCount,
     stars,
-    // _id,
+    _id,
+    inStock,
   } = product;
+
+  const inWishlist = isPresentInWishlist(wishlist, _id);
+  const inCart = isPresentInCart(cartList, _id);
 
   const formattedPrice = price.toLocaleString("en-IN", {
     style: "currency",
@@ -46,6 +64,31 @@ export default function ProductDetail() {
     maximumFractionDigits: 0,
   });
 
+  const handleCart = (inStock) => {
+    if (token) {
+      if (!inStock) return;
+      if (inCart) {
+        navigate("/cart");
+      } else {
+        addToCart(dataDispatch, product, token, setIsDisabled);
+      }
+    } else {
+      navigate("/auth");
+    }
+  };
+
+  const handleWishlist = () => {
+    if (token) {
+      if (inWishlist) {
+        removeFromWishlist(dataDispatch, token, _id, setIsDisabled);
+      } else {
+        addToWishlist(dataDispatch, token, product, setIsDisabled);
+      }
+    } else {
+      navigate("/auth");
+    }
+  };
+
   return (
     <>
       {isError ? (
@@ -55,7 +98,13 @@ export default function ProductDetail() {
           <div className={classes["product-detail-card"]}>
             <div className={classes["img-container"]}>
               <img src={image} alt={name} />
-              <button className={classes["wishlist-icon"]}>
+              <button
+                className={`${classes["wishlist-icon"]} ${
+                  isDisabled && classes["disabled-wishlist-icon"]
+                } ${inWishlist && classes["added-wishlist-icon"]}`}
+                onClick={handleWishlist}
+                disabled={isDisabled}
+              >
                 <AiFillHeart size={"1.5rem"} />
               </button>
             </div>
@@ -78,7 +127,15 @@ export default function ProductDetail() {
               <p>
                 <span>Description:</span> {description}
               </p>
-              <button className={classes["add-cart-btn"]}>Add to Cart</button>
+              <button
+                className={`${classes["add-cart-btn"]} ${
+                  isDisabled && classes["disabled-cart-btn"]
+                } ${inCart && classes["added-cart-btn"]}`}
+                onClick={() => handleCart(inStock)}
+                disabled={isDisabled}
+              >
+                {inCart ? "Move to Cart" : "Add to Cart"}
+              </button>
             </div>
           </div>
         </main>

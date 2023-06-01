@@ -117,6 +117,19 @@
   font-size: 1rem;
 }
 
+.cart-btn:hover {
+  color: var(--light-purple);
+}
+
+.disabled-cart-btn {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.added-cart-btn {
+  color: var(--secondary-color);
+}
+
 .wishlist-icon {
   position: absolute;
   right: 0;
@@ -130,6 +143,14 @@
   padding: 5px;
   border-bottom-left-radius: 6px;
   cursor: pointer;
+}
+
+.disabled-wishlist-icon {
+  cursor: not-allowed;
+}
+
+.added-wishlist-icon {
+  color: var(--primary-color);
 }
 
 .wishlist-icon:hover {
