@@ -37,7 +37,7 @@ export default function Products() {
         <p className={classes["product-number"]}>
           {loader ? "Loading...." : `Showing ${totalProducts} Products`}
         </p>
-        {!filteredProductsList.length && (
+        {!filteredProductsList.length && !loader && (
           <h1 className={classes["alert"]}>Didn't find any product</h1>
         )}
         <div className={classes["product-card-container"]}>

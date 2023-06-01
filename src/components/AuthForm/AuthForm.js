@@ -1,5 +1,7 @@
 import React from "react";
 import { Link, useSearchParams } from "react-router-dom";
+import { GrView } from "react-icons/gr";
+import { MdVisibilityOff } from "react-icons/md";
 
 import classes from "./AuthForm.module.css";
 import { useImmer } from "use-immer";
@@ -8,7 +10,7 @@ import { guestUser } from "../../utils/contants";
 export default function AuthForm({ handleFormSubmit, err, setErr }) {
   const [searchParams] = useSearchParams();
   const isSignup = searchParams.get("mode") === "signup";
-
+  const [isVisible, setIsVisible] = useImmer(false);
   const [formData, setFormData] = useImmer({
     name: "",
     email: "",
@@ -37,6 +39,10 @@ export default function AuthForm({ handleFormSubmit, err, setErr }) {
   };
 
   const handleGuestLogin = () => {
+    setFormData((draft) => {
+      draft.email = guestUser.email;
+      draft.password = guestUser.password;
+    });
     handleFormSubmit(guestUser);
   };
 
@@ -48,6 +54,10 @@ export default function AuthForm({ handleFormSubmit, err, setErr }) {
       password: "",
       confirmPassword: "",
     });
+  };
+
+  const handleVisibility = () => {
+    setIsVisible((prev) => !prev);
   };
 
   return (
@@ -88,29 +98,51 @@ export default function AuthForm({ handleFormSubmit, err, setErr }) {
 
           <div className={classes["input-container"]}>
             <label htmlFor="pwd">Password:</label>
-            <input
-              type="text"
-              name="password"
-              id="pwd"
-              placeholder="Password"
-              onChange={handleChange}
-              value={formData.password}
-              required
-            />
+            <span>
+              <input
+                type={isVisible ? "text" : "password"}
+                name="password"
+                id="pwd"
+                placeholder="Password"
+                onChange={handleChange}
+                value={formData.password}
+                required
+              />
+              {isVisible ? (
+                <GrView
+                  className={classes["password-visible"]}
+                  size={"1rem"}
+                  onClick={handleVisibility}
+                />
+              ) : (
+                <MdVisibilityOff
+                  className={classes["password-visible"]}
+                  size={"1rem"}
+                  onClick={handleVisibility}
+                />
+              )}
+            </span>
           </div>
 
           {isSignup && (
             <div className={classes["input-container"]}>
-              <label htmlFor="cnf-pwd">Password:</label>
-              <input
-                type="text"
-                name="confirmPassword"
-                id="cnf-pwd"
-                placeholder="Confirm Password"
-                onChange={handleChange}
-                value={formData.confirmPassword}
-                required
-              />
+              <label htmlFor="cnf-pwd">Confirm Password:</label>
+              <span>
+                <input
+                  type={isVisible ? "text" : "password"}
+                  name="confirmPassword"
+                  id="cnf-pwd"
+                  placeholder="Confirm Password"
+                  onChange={handleChange}
+                  value={formData.confirmPassword}
+                  required
+                />
+                <GrView
+                  className={classes["password-visible"]}
+                  size={"1rem"}
+                  onClick={handleVisibility}
+                />
+              </span>
             </div>
           )}
 
