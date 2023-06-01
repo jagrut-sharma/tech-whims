@@ -37,6 +37,9 @@ export default function Products() {
         <p className={classes["product-number"]}>
           {loader ? "Loading...." : `Showing ${totalProducts} Products`}
         </p>
+        {!filteredProductsList.length && (
+          <h1 className={classes["alert"]}>Didn't find any product</h1>
+        )}
         <div className={classes["product-card-container"]}>
           {filteredProductsList.map((product) => (
             <ProductCard {...product} key={product._id} />
