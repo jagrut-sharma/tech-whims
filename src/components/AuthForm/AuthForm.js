@@ -137,11 +137,19 @@ export default function AuthForm({ handleFormSubmit, err, setErr }) {
                   value={formData.confirmPassword}
                   required
                 />
-                <GrView
-                  className={classes["password-visible"]}
-                  size={"1rem"}
-                  onClick={handleVisibility}
-                />
+                {isVisible ? (
+                  <GrView
+                    className={classes["password-visible"]}
+                    size={"1rem"}
+                    onClick={handleVisibility}
+                  />
+                ) : (
+                  <MdVisibilityOff
+                    className={classes["password-visible"]}
+                    size={"1rem"}
+                    onClick={handleVisibility}
+                  />
+                )}
               </span>
             </div>
           )}
