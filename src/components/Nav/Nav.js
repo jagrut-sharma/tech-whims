@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 import { FaShoppingCart } from "react-icons/fa";
@@ -10,13 +10,23 @@ import { useFilter } from "../../context/FilterContext";
 import { ACTIONS } from "../../utils/actions";
 
 export default function Nav() {
-  const {
-    appliedFilterValue: { search },
-    filterDispatch,
-  } = useFilter();
+  const { appliedFilterValue, filterDispatch } = useFilter();
+  const [searchText, setSearchText] = useState("");
+
+  useEffect(() => {
+    const id = setTimeout(() => {
+      filterDispatch({ type: ACTIONS.FILTER_SEARCH, payload: searchText });
+    }, 500);
+
+    return () => clearTimeout(id);
+  }, [searchText]);
+
+  useEffect(() => {
+    setSearchText(appliedFilterValue.search);
+  }, [appliedFilterValue]);
 
   const handleInputChange = (e) => {
-    filterDispatch({ type: ACTIONS.FILTER_SEARCH, payload: e.target.value });
+    setSearchText(e.target.value);
   };
 
   return (
@@ -40,7 +50,7 @@ export default function Nav() {
             name="search-bar"
             id="search-bar-input"
             placeholder="Search Products"
-            value={search}
+            value={searchText}
             onChange={handleInputChange}
           />
         </div>

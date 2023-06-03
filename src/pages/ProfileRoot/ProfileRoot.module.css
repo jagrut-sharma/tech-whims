@@ -11,3 +11,8 @@
   color: inherit;
   margin: 0 1rem;
 }
+
+.active-profile {
+  color: #1b4b33;
+  font-weight: bold;
+}

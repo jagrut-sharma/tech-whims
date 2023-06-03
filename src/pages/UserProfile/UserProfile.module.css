@@ -4,9 +4,13 @@
   align-items: center;
 }
 
-.info span {
+.profile-label {
   font-weight: bold;
-  margin-right: 10px;
+  margin-right: 5px;
+}
+
+.full-name {
+  color: var(--fourth-color);
 }
 
 .info p {

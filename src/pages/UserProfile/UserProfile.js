@@ -18,12 +18,14 @@ export default function UserProfile() {
 
   return (
     <section className={classes["info"]}>
-      <h3>Welcome, {fullName}</h3>
+      <h3>
+        Welcome, <span className={classes["full-name"]}>{fullName}</span>
+      </h3>
       <p>
-        <span>Name: </span> {fullName}
+        <span className={classes["profile-label"]}>Name: </span> {fullName}
       </p>
       <p>
-        <span>Email: </span> {user.email}
+        <span className={classes["profile-label"]}>Email: </span> {user.email}
       </p>
       <button onClick={logout}>Logout</button>
     </section>
