@@ -5,7 +5,16 @@ export const initialData = {
   productsList: [],
   wishlist: [],
   cartList: [],
-  addressList: [],
+  addressList: [
+    {
+      name: "Adarsh Balika",
+      address: "4, PrivetDrive",
+      city: "Little Whinging",
+      state: "Surrey",
+      pincode: "02285",
+      phoneNumber: "9876543210",
+    },
+  ],
 };
 
 export const dataReducer = function (draft, action) {

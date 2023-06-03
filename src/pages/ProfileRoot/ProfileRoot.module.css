@@ -6,13 +6,30 @@
   margin-top: 3rem;
 }
 
+.card-container {
+  background-color: var(--filter-bar-color);
+  padding: 0 0 1.5rem;
+}
+
+.navlinks-profile-container {
+  display: flex;
+  justify-content: space-evenly;
+  background-color: var(--tertiary-color);
+  font-size: 1.5rem;
+}
+
 .navlinks-profile {
   text-decoration: none;
-  color: inherit;
-  margin: 0 1rem;
+  color: var(--secondary-color);
+  margin: 0;
+  padding: 1rem 1.5rem;
+}
+
+.navlinks-profile:hover {
+  color: var(--gray-shade);
 }
 
 .active-profile {
-  color: #1b4b33;
+  color: var(--primary-color);
   font-weight: bold;
 }

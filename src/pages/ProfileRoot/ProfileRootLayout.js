@@ -13,15 +13,17 @@ export default function ProfileRootLayout() {
   return (
     <>
       <main className={classes["profile-container"]}>
-        <div>
-          <NavLink to={"/profile"} className={getClass} end>
-            User Info
-          </NavLink>
-          <NavLink to={"/profile/address"} className={getClass}>
-            Addresses
-          </NavLink>
+        <div className={classes["card-container"]}>
+          <div className={classes["navlinks-profile-container"]}>
+            <NavLink to={"/profile"} className={getClass} end>
+              User Info
+            </NavLink>
+            <NavLink to={"/profile/address"} className={getClass}>
+              Addresses
+            </NavLink>
+          </div>
+          <Outlet />
         </div>
-        <Outlet />
       </main>
     </>
   );
