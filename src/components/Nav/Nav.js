@@ -18,6 +18,7 @@ export default function Nav() {
       filterDispatch({ type: ACTIONS.FILTER_SEARCH, payload: searchText });
     }, 500);
 
+    // runs below clearing function(function returned) before running anonymous arrow function
     return () => clearTimeout(id);
   }, [searchText]);
 
