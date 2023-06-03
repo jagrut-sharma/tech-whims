@@ -1,0 +1,29 @@
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.info span {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.info p {
+  margin: 0.5rem;
+  align-self: flex-start;
+}
+
+.info button {
+  font: inherit;
+  margin-top: 0.5rem;
+  background-color: black;
+  color: var(--primary-color);
+  font-weight: bold;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.info button:hover {
+  color: var(--secondary-color);
+}

@@ -13,6 +13,8 @@ import RequireAuth from "./components/RequireAuth";
 import UserProfile from "./pages/UserProfile/UserProfile";
 import ProductDetail from "./pages/ProductDetails/ProductDetail";
 import ProductRootLayout from "./pages/ProductRoot/ProductRootLayout";
+import Addresses from "./components/Addresses/Addresses";
+import ProfileRootLayout from "./pages/ProfileRoot/ProfileRootLayout";
 
 const router = createBrowserRouter([
   {
@@ -62,9 +64,19 @@ const router = createBrowserRouter([
         path: "profile",
         element: (
           <RequireAuth>
-            <UserProfile />
+            <ProfileRootLayout />
           </RequireAuth>
         ),
+        children: [
+          {
+            index: true,
+            element: <UserProfile />,
+          },
+          {
+            path: "address",
+            element: <Addresses />,
+          },
+        ],
       },
       {
         path: "mockman",

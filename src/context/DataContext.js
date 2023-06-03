@@ -4,6 +4,7 @@ import { dataReducer, initialData } from "../reducer/reducer";
 import { ACTIONS } from "../utils/actions";
 import { useImmerReducer } from "use-immer";
 import axios from "axios";
+import { useAuth } from "./AuthContext";
 
 const DataContext = createContext({
   dataState: {},
@@ -26,6 +27,7 @@ export const DataProvider = ({ children }) => {
   const [dataState, dataDispatch] = useImmerReducer(dataReducer, initialData);
   const [loader, setLoader] = useState(false);
   const [isError, setIsError] = useState(false);
+  const { user } = useAuth();
 
   const dataFetch = async () => {
     try {
@@ -54,6 +56,13 @@ export const DataProvider = ({ children }) => {
   useEffect(() => {
     dataFetch();
   }, []);
+
+  useEffect(() => {
+    if (user) {
+      dataDispatch({ type: ACTIONS.ADD_TO_CART, payload: user.cart });
+      dataDispatch({ type: ACTIONS.ADD_TO_WISHLIST, payload: user.wishlist });
+    }
+  }, [user]);
 
   const dataContext = {
     dataState,

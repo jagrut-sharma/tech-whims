@@ -1,0 +1,13 @@
+.profile-container {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 3rem;
+}
+
+.navlinks-profile {
+  text-decoration: none;
+  color: inherit;
+  margin: 0 1rem;
+}

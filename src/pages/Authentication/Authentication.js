@@ -23,8 +23,6 @@ export default function Authentication() {
 
   const handleFormSubmit = async (formValue) => {
     try {
-      console.log(formValue);
-
       // check for password:
       if (
         mode === "signup" &&
@@ -38,21 +36,17 @@ export default function Authentication() {
         data: { encodedToken },
       } = res;
 
-      let fullName;
+      let user;
 
       if (mode === "login") {
-        const {
-          foundUser: { firstName, lastName },
-        } = res.data;
-        fullName = `${firstName} ${lastName}`;
+        const { foundUser } = res.data;
+        user = foundUser;
       } else {
-        const {
-          createdUser: { name },
-        } = res.data;
-        fullName = name;
+        const { createdUser } = res.data;
+        user = createdUser;
       }
 
-      handleLogin(encodedToken, fullName);
+      handleLogin(encodedToken, user);
       navigate(redirectPath, { replace: true });
     } catch (err) {
       console.log("In catch");
