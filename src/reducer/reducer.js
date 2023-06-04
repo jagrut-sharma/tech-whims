@@ -42,4 +42,16 @@ export const dataReducer = function (draft, action) {
   if (action.type === ACTIONS.REMOVE_FROM_CART) {
     draft.cartList = action.payload;
   }
+
+  if (action.type === ACTIONS.ADD_ADDRESS) {
+    draft.addressList.push(action.payload);
+  }
+
+  if (action.type === ACTIONS.DELETE_ADDRESS) {
+    draft.addressList = action.payload;
+  }
+
+  if (action.type === ACTIONS.EDIT_ADDRESS) {
+    draft.addressList = action.payload;
+  }
 };

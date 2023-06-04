@@ -5,6 +5,10 @@
   padding: 0 1rem;
 }
 
+.info > h3 {
+  margin: 1rem;
+}
+
 .profile-label {
   font-weight: bold;
   margin-right: 5px;
