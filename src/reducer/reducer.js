@@ -8,11 +8,12 @@ export const initialData = {
   addressList: [
     {
       name: "Adarsh Balika",
-      address: "4, PrivetDrive",
+      address: "4, Privet Drive",
       city: "Little Whinging",
       state: "Surrey",
       pincode: "02285",
       phoneNumber: "9876543210",
+      id: "2364c34d-7645-49cb-8b74-4bc5cb09711d",
     },
   ],
 };

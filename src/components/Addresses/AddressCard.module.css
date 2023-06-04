@@ -1,0 +1,18 @@
+.btn-container {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 0.5rem;
+}
+
+.btn-container > button {
+  font: inherit;
+  background-color: var(--tertiary-color);
+  color: var(--primary-color);
+  font-weight: bold;
+  padding: 0.25rem 0.75rem;
+  cursor: pointer;
+}
+
+h3 {
+  margin: 0;
+}
