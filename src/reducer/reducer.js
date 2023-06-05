@@ -58,4 +58,12 @@ export const dataReducer = function (draft, action) {
   if (action.type === ACTIONS.UPDATE_QUANTITY) {
     draft.cartList = action.payload;
   }
+
+  if (action.type === ACTIONS.CLEAR_CART) {
+    draft.cartList = [];
+  }
+
+  if (action.type === ACTIONS.CLEAR_WISHLIST) {
+    draft.wishlist = [];
+  }
 };
