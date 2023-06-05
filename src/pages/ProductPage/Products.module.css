@@ -19,9 +19,9 @@ main .product-number {
 
 .product-card-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
   place-items: center;
-  grid-gap: 1rem;
+  grid-gap: 2rem;
 }
 
 @media screen and (max-width: 750px) {
