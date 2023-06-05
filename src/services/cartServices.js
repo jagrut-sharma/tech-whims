@@ -51,3 +51,37 @@ export const removeFromCart = async (
     console.log(`Error in adding to cart: ${error}`);
   }
 };
+
+export const updateCartQuantity = async (
+  dispatch,
+  productID,
+  token,
+  process,
+  setIsDisabled
+) => {
+  try {
+    setIsDisabled(true);
+    const res = await axios.post(
+      `/api/user/cart/${productID}`,
+      {
+        action: {
+          type: process === "INCREMENT" ? "increment" : "decrement",
+        },
+      },
+      {
+        headers: {
+          authorization: token,
+        },
+      }
+    );
+    setIsDisabled(false);
+
+    const {
+      data: { cart },
+    } = res;
+
+    dispatch({ type: ACTIONS.UPDATE_QUANTITY, payload: cart });
+  } catch (error) {
+    console.log(`Error in updating quantity in cart: ${error}`);
+  }
+};

@@ -54,4 +54,8 @@ export const dataReducer = function (draft, action) {
   if (action.type === ACTIONS.EDIT_ADDRESS) {
     draft.addressList = action.payload;
   }
+
+  if (action.type === ACTIONS.UPDATE_QUANTITY) {
+    draft.cartList = action.payload;
+  }
 };

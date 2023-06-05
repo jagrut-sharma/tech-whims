@@ -8,10 +8,15 @@ import { BsBagHeart } from "react-icons/bs";
 import classes from "./Nav.module.css";
 import { useFilter } from "../../context/FilterContext";
 import { ACTIONS } from "../../utils/actions";
+import { useDataContext } from "../../context/DataContext";
 
 export default function Nav() {
   const { appliedFilterValue, filterDispatch } = useFilter();
   const [searchText, setSearchText] = useState("");
+
+  const {
+    dataState: { wishlist, cartList },
+  } = useDataContext();
 
   useEffect(() => {
     const id = setTimeout(() => {
@@ -80,10 +85,16 @@ export default function Nav() {
 
           <Link to={"/wishlist"} className={classes.wishlist}>
             <BsBagHeart size={"1.5rem"} color="#42944c" />
+            {wishlist.length > 0 && (
+              <span className={classes["number-label"]}>{wishlist.length}</span>
+            )}
           </Link>
 
           <Link to={"/cart"} className={classes.cart}>
             <FaShoppingCart size={"1.5rem"} color="#42944c" />
+            {cartList.length > 0 && (
+              <span className={classes["number-label"]}>{cartList.length}</span>
+            )}
           </Link>
         </div>
       </nav>
