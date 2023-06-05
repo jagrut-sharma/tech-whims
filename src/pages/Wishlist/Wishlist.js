@@ -16,7 +16,7 @@ export default function Wishlist() {
 
         {wishlist.length === 0 && (
           <p className={classes["empty-alert"]}>
-            Please add items to see your wishlist
+            Please add items to see your wishlist. Testing
           </p>
         )}
 
