@@ -31,7 +31,8 @@ export const removeFromCart = async (
   dispatch,
   productID,
   token,
-  setIsDisabled
+  setIsDisabled,
+  clearing = false
 ) => {
   try {
     setIsDisabled(true);
@@ -46,9 +47,10 @@ export const removeFromCart = async (
       data: { cart },
     } = res;
 
+    console.log(clearing);
     dispatch({ type: ACTIONS.REMOVE_FROM_CART, payload: cart });
   } catch (error) {
-    console.log(`Error in adding to cart: ${error}`);
+    console.log(`Error in removing from cart: ${error}`);
   }
 };
 
@@ -84,4 +86,18 @@ export const updateCartQuantity = async (
   } catch (error) {
     console.log(`Error in updating quantity in cart: ${error}`);
   }
+};
+
+export const clearCart = (
+  cartList,
+  dispatch,
+  token,
+  setIsDisabled,
+  clearing
+) => {
+  console.log(cartList);
+
+  cartList.forEach((item) =>
+    removeFromCart(dispatch, item._id, token, setIsDisabled, clearing)
+  );
 };

@@ -29,6 +29,7 @@ export default function CheckoutAddCard({
         value={location}
         id={id}
         onChange={() => setSelectedAdd(address)}
+        checked={selectedAdd?.id === id}
       />
       <label htmlFor={id}>
         <h3>{name}</h3>

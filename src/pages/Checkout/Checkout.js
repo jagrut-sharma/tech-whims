@@ -8,15 +8,21 @@ import CheckoutAddCard from "../../components/CheckoutAddCard/CheckoutAddCard";
 import AddressForm from "../../components/Addresses/AddressForm";
 import { useImmer } from "use-immer";
 import { defaultFormValues } from "../../utils/contants";
+import { ACTIONS } from "../../utils/actions";
+import { clearCart } from "../../services/cartServices";
+import { useAuth } from "../../context/AuthContext";
 
 export default function Checkout() {
   const [selectedAdd, setSelectedAdd] = useState(null);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [formValue, setFormValue] = useImmer(defaultFormValues);
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const {
     dataState: { cartList, addressList },
+    dataDispatch,
   } = useDataContext();
+  const { token } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -71,7 +77,9 @@ export default function Checkout() {
     if (selectedAdd) {
       // Successful
       console.log("Successfull");
+      dataDispatch({ type: ACTIONS.CLEAR_CART });
       setSelectedAdd(null);
+      clearCart(cartList, dataDispatch, token, setIsDisabled, true);
     } else {
       // show error to select address
       console.log("Select an address first");
@@ -130,6 +138,7 @@ export default function Checkout() {
           <button
             className={classes["place-order"]}
             onClick={() => handleOrderPlacement(finalPrice)}
+            disabled={isDisabled}
           >
             Place Order
           </button>
