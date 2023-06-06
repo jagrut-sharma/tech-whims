@@ -11,6 +11,7 @@ export default function AuthForm({ handleFormSubmit, err, setErr }) {
   const [searchParams] = useSearchParams();
   const isSignup = searchParams.get("mode") === "signup";
   const [isVisible, setIsVisible] = useImmer(false);
+  const [isVisibleCnfrm, setIsVisibleCnfrm] = useImmer(false);
   const [formData, setFormData] = useImmer({
     name: "",
     email: "",
@@ -59,6 +60,10 @@ export default function AuthForm({ handleFormSubmit, err, setErr }) {
 
   const handleVisibility = () => {
     setIsVisible((prev) => !prev);
+  };
+
+  const handleCnfrmVisibility = () => {
+    setIsVisibleCnfrm((prev) => !prev);
   };
 
   return (
@@ -130,7 +135,7 @@ export default function AuthForm({ handleFormSubmit, err, setErr }) {
               <label htmlFor="cnf-pwd">Confirm Password:</label>
               <span>
                 <input
-                  type={isVisible ? "text" : "password"}
+                  type={isVisibleCnfrm ? "text" : "password"}
                   name="confirmPassword"
                   id="cnf-pwd"
                   placeholder="Confirm Password"
@@ -138,17 +143,17 @@ export default function AuthForm({ handleFormSubmit, err, setErr }) {
                   value={formData.confirmPassword}
                   required
                 />
-                {isVisible ? (
+                {isVisibleCnfrm ? (
                   <GrView
                     className={classes["password-visible"]}
                     size={"1rem"}
-                    onClick={handleVisibility}
+                    onClick={handleCnfrmVisibility}
                   />
                 ) : (
                   <MdVisibilityOff
                     className={classes["password-visible"]}
                     size={"1rem"}
-                    onClick={handleVisibility}
+                    onClick={handleCnfrmVisibility}
                   />
                 )}
               </span>

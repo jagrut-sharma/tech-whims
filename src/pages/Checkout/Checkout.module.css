@@ -92,6 +92,19 @@
   cursor: pointer;
 }
 
+.order-confirmation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 1rem 5rem;
+}
+
+.order-confirmation > h1 {
+  text-align: center;
+
+  color: var(--fourth-color);
+}
+
 @media screen and (max-width: 750px) {
   .checkout-container {
     display: flex;

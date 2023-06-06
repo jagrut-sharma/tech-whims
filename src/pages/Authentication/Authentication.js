@@ -54,9 +54,11 @@ export default function Authentication() {
     } catch (err) {
       console.log("In catch");
       console.log(err);
-      if (err.message === "Password do not match") {
+      if (err.response?.status === 401) {
+        setError("Wrong Password");
+      } else if (err.message === "Password do not match") {
         setError(err.message);
-      } else if (err.response.status === 422) {
+      } else if (err.response?.status === 422) {
         setError("User already exists. Please login");
       } else {
         setError("No user Found, please signup");

@@ -1,5 +1,7 @@
 import React from "react";
 import { v4 as uuid } from "uuid";
+import Tippy from "@tippyjs/react";
+import "tippy.js/dist/tippy.css"; // optiona
 
 import classes from "./AddressForm.module.css";
 import { useDataContext } from "../../context/DataContext";
@@ -94,15 +96,17 @@ export default function AddressForm({
           onChange={handleChange}
           required
         />
-        <input
-          type="tel"
-          placeholder="Phone number: 10 digits"
-          pattern="[0-9]{10}"
-          name="phoneNumber"
-          value={formValues.phoneNumber}
-          onChange={handleChange}
-          required
-        />
+        <Tippy content="Enter 10 digits" placement="left">
+          <input
+            type="tel"
+            placeholder="Phone number: 10 digits"
+            pattern="[0-9]{10}"
+            name="phoneNumber"
+            value={formValues.phoneNumber}
+            onChange={handleChange}
+            required
+          />
+        </Tippy>
         <div className={classes["btn-container"]}>
           {editingAddress ? (
             <button type="button" onClick={() => handleSave(formValues.id)}>

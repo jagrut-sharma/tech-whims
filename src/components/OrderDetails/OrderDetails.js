@@ -6,7 +6,10 @@ import { getFormattedValue } from "../../utils/getFormattedPrice";
 
 export default function OrderDetails({ cartList }) {
   const navigate = useNavigate();
-  const totalPrice = cartList.reduce((total, { price }) => total + price, 0);
+  const totalPrice = cartList.reduce(
+    (total, { price, qty }) => total + price * qty,
+    0
+  );
 
   return (
     <div className={classes["order-details-container"]}>
@@ -15,9 +18,9 @@ export default function OrderDetails({ cartList }) {
         {cartList.map(({ name, _id, qty, price }) => (
           <li key={_id} className={classes["order-price"]}>
             <span>
-              {name} ({qty}):
+              {name} x {qty} <strong>:</strong>
             </span>
-            <span>{getFormattedValue(price)}</span>
+            <span>{getFormattedValue(price * qty)}</span>
           </li>
         ))}
       </ul>

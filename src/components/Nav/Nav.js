@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 import { FaShoppingCart } from "react-icons/fa";
 // import { BsFillBookmarkHeartFill } from "react-icons/bs";
@@ -13,7 +13,7 @@ import { useDataContext } from "../../context/DataContext";
 export default function Nav() {
   const { appliedFilterValue, filterDispatch } = useFilter();
   const [searchText, setSearchText] = useState("");
-
+  const navigate = useNavigate();
   const {
     dataState: { wishlist, cartList },
   } = useDataContext();
@@ -35,6 +35,11 @@ export default function Nav() {
     setSearchText(e.target.value);
   };
 
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    navigate("/products");
+  };
+
   return (
     <>
       <nav className={classes.nav}>
@@ -51,14 +56,16 @@ export default function Nav() {
         </h1>
 
         <div className={classes["search-bar"]}>
-          <input
-            type="search"
-            name="search-bar"
-            id="search-bar-input"
-            placeholder="Search Products"
-            value={searchText}
-            onChange={handleInputChange}
-          />
+          <form onSubmit={handleSearchSubmit}>
+            <input
+              type="search"
+              name="search-bar"
+              id="search-bar-input"
+              placeholder="Search Products"
+              value={searchText}
+              onChange={handleInputChange}
+            />
+          </form>
         </div>
 
         {/* <form action="#" className={classes["search-bar"]}>

@@ -13,12 +13,14 @@ import { clearCart } from "../../services/cartServices";
 import { useAuth } from "../../context/AuthContext";
 import { getFormattedValue } from "../../utils/getFormattedPrice";
 import { toast } from "react-toastify";
+import { Popper } from "../../utils/Popper";
 
 export default function Checkout() {
   const [selectedAdd, setSelectedAdd] = useState(null);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [formValue, setFormValue] = useImmer(defaultFormValues);
   const [isDisabled, setIsDisabled] = useState(false);
+  const [orderPlaced, setOrderPlaced] = useState(false);
 
   const { user } = useAuth();
 
@@ -35,26 +37,36 @@ export default function Checkout() {
     }
   }, []);
 
+  useEffect(() => {
+    if (orderPlaced) {
+      setTimeout(() => {
+        setOrderPlaced(false);
+        navigate("/");
+      }, 5000);
+    }
+  }, [orderPlaced]);
+
   const handleFormVisibility = () => {
     setIsFormOpen(true);
     setFormValue(defaultFormValues);
   };
 
   const totalPrice = cartList.reduce(
-    (total, { originalPrice }) => total + originalPrice,
+    (total, { originalPrice, qty }) => total + originalPrice * qty,
     0
   );
 
   const totalDiscount = cartList.reduce(
-    (total, { originalPrice, price }) => total + (originalPrice - price),
+    (total, { originalPrice, price, qty }) =>
+      total + (originalPrice - price) * qty,
     0
   );
 
   const delivery = 100;
   const finalPrice = totalPrice - totalDiscount + delivery;
+  const discountRate = ((totalDiscount / totalPrice) * 100).toFixed();
 
   const handleOrderPlacement = (finalPrice) => {
-    console.log(finalPrice);
     if (selectedAdd) {
       displayRazorpay();
     } else {
@@ -99,12 +111,13 @@ export default function Checkout() {
         name: "Tech Whims",
         description: "Thank you for shopping with us",
         handler: function (response) {
+          console.log(response);
           dataDispatch({ type: ACTIONS.CLEAR_CART });
           setSelectedAdd(null);
           clearCart(cartList, dataDispatch, token, setIsDisabled, true);
-          // Popper();
+          Popper();
+          setOrderPlaced(true);
           toast.success("Order Placed", toastConfig);
-          navigate("/");
         },
         prefill: {
           name: `${user["name" || "firstName"]}`,
@@ -121,63 +134,74 @@ export default function Checkout() {
   };
 
   return (
-    <main className={classes["checkout-container"]}>
-      <div className={classes["address-container"]}>
-        <h3>Address Details</h3>
-
-        {addressList.map((addrs) => (
-          <CheckoutAddCard
-            key={addrs.id}
-            address={addrs}
-            setSelectedAdd={setSelectedAdd}
-            selectedAdd={selectedAdd}
-          />
-        ))}
-
-        <div className={classes["new-addrs-container"]}>
-          {isFormOpen ? (
-            <AddressForm
-              setFormValues={setFormValue}
-              formValues={formValue}
-              setFormOpen={setIsFormOpen}
-            />
-          ) : (
-            <h2
-              onClick={handleFormVisibility}
-              className={classes["add-address"]}
-            >
-              <AiFillPlusCircle color={"#208854"} /> Add new address
-            </h2>
-          )}
+    <>
+      {orderPlaced ? (
+        <div className={classes["order-confirmation"]}>
+          <h1>Your order has been placed!!</h1>
         </div>
-      </div>
+      ) : (
+        <main className={classes["checkout-container"]}>
+          <div className={classes["address-container"]}>
+            <h3>Address Details</h3>
 
-      <div>
-        <h3>Price Details</h3>
-        <div className={classes["price-details-container"]}>
-          <p>
-            Price: <span>{getFormattedValue(totalPrice)}</span>
-          </p>
-          <p>
-            Discount: <span>{getFormattedValue(totalDiscount)}</span>
-          </p>
-          <p>
-            Delivery Charge: <span>{getFormattedValue(delivery)}</span>
-          </p>
+            {addressList.map((addrs) => (
+              <CheckoutAddCard
+                key={addrs.id}
+                address={addrs}
+                setSelectedAdd={setSelectedAdd}
+                selectedAdd={selectedAdd}
+              />
+            ))}
 
-          <p className={classes["total"]}>
-            Total Price: <span>{getFormattedValue(finalPrice)}</span>
-          </p>
+            <div className={classes["new-addrs-container"]}>
+              {isFormOpen ? (
+                <AddressForm
+                  setFormValues={setFormValue}
+                  formValues={formValue}
+                  setFormOpen={setIsFormOpen}
+                />
+              ) : (
+                <h2
+                  onClick={handleFormVisibility}
+                  className={classes["add-address"]}
+                >
+                  <AiFillPlusCircle color={"#208854"} /> Add new address
+                </h2>
+              )}
+            </div>
+          </div>
 
-          <button
-            className={classes["place-order"]}
-            onClick={() => handleOrderPlacement(finalPrice)}
-            disabled={isDisabled}
-          >
-            Place Order
-          </button>
-        </div>
-      </div>
-    </main>
+          <div>
+            <h3>Price Details</h3>
+            <div className={classes["price-details-container"]}>
+              <p>
+                Price: <span>{getFormattedValue(totalPrice)}</span>
+              </p>
+              <p>
+                Discount:{" "}
+                <span>{`- ${getFormattedValue(
+                  totalDiscount
+                )} (${discountRate}%)`}</span>
+              </p>
+              <p>
+                Delivery Charge: <span>+ {getFormattedValue(delivery)}</span>
+              </p>
+
+              <p className={classes["total"]}>
+                Total Price: <span>{getFormattedValue(finalPrice)}</span>
+              </p>
+
+              <button
+                className={classes["place-order"]}
+                onClick={() => handleOrderPlacement(finalPrice)}
+                disabled={isDisabled}
+              >
+                Place Order
+              </button>
+            </div>
+          </div>
+        </main>
+      )}
+    </>
   );
 }

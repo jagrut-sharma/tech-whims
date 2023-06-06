@@ -88,6 +88,10 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "",
+        element: "",
+      },
+      {
         path: "mockman",
         element: <MockAPI />,
       },

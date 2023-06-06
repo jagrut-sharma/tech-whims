@@ -109,8 +109,6 @@ export const clearCart = (
   setIsDisabled,
   clearing
 ) => {
-  console.log(cartList);
-
   cartList.forEach((item) =>
     removeFromCart(dispatch, item._id, token, setIsDisabled, clearing)
   );
