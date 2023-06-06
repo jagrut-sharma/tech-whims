@@ -2,16 +2,11 @@ import React from "react";
 
 import classes from "./OrderDetails.module.css";
 import { useNavigate } from "react-router-dom";
+import { getFormattedValue } from "../../utils/getFormattedPrice";
 
 export default function OrderDetails({ cartList }) {
   const navigate = useNavigate();
   const totalPrice = cartList.reduce((total, { price }) => total + price, 0);
-
-  const formattedTotalPrice = totalPrice.toLocaleString("en-IN", {
-    style: "currency",
-    currency: "INR",
-    maximumFractionDigits: 0,
-  });
 
   return (
     <div className={classes["order-details-container"]}>
@@ -22,13 +17,13 @@ export default function OrderDetails({ cartList }) {
             <span>
               {name} ({qty}):
             </span>
-            <span>{price}</span>
+            <span>{getFormattedValue(price)}</span>
           </li>
         ))}
       </ul>
 
       <p>
-        Total Price: <span>{formattedTotalPrice}</span>
+        Total Price: <span>{getFormattedValue(totalPrice)}</span>
       </p>
 
       <button

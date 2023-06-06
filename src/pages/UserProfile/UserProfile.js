@@ -6,6 +6,8 @@ import classes from "./UserProfile.module.css";
 import { useDataContext } from "../../context/DataContext";
 import { ACTIONS } from "../../utils/actions";
 import { useFilter } from "../../context/FilterContext";
+import { toast } from "react-toastify";
+import { toastConfig } from "../../utils/contants";
 
 export default function UserProfile() {
   const { handleLogout } = useAuth();
@@ -21,6 +23,7 @@ export default function UserProfile() {
     dataDispatch({ type: ACTIONS.CLEAR_CART });
     dataDispatch({ type: ACTIONS.CLEAR_WISHLIST });
     filterDispatch({ type: ACTIONS.FILTER_CLEAR_FILTER });
+    toast.info("Logged out", toastConfig);
     navigate("/");
   };
 

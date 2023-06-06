@@ -1,5 +1,7 @@
 import axios from "axios";
 import { ACTIONS } from "../utils/actions";
+import { toast } from "react-toastify";
+import { toastConfig } from "../utils/contants";
 
 export const addToWishlist = async (
   dispatch,
@@ -26,9 +28,11 @@ export const addToWishlist = async (
       data: { wishlist },
     } = res;
 
+    toast.success("ADDED TO WISHLIST", toastConfig);
     dispatch({ type: ACTIONS.ADD_TO_WISHLIST, payload: wishlist });
   } catch (error) {
     console.log(`Error in adding to wishlist: ${error}`);
+    toast.error("Error in adding to wishlist", toastConfig);
   }
 };
 
@@ -50,8 +54,10 @@ export const removeFromWishlist = async (
       data: { wishlist },
     } = res;
 
+    toast.info("REMOVED FROM WISHLIST", toastConfig);
     dispatch({ type: ACTIONS.REMOVE_FROM_WISHLIST, payload: wishlist });
   } catch (error) {
     console.log(`Error in removing from wishlist: ${error}`);
+    toast.error("Error in removing from wishlist", toastConfig);
   }
 };

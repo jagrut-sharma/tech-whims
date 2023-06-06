@@ -13,6 +13,7 @@ import {
   removeFromWishlist,
 } from "../../services/wishlistService";
 import { addToCart } from "../../services/cartServices";
+import { getFormattedValue } from "../../utils/getFormattedPrice";
 
 export default function ProductCard(product) {
   const [isDisabled, setIsDisabled] = useState(false);
@@ -39,18 +40,6 @@ export default function ProductCard(product) {
 
   const inWishlist = isPresentInWishlist(wishlist, _id);
   const inCart = isPresentInCart(cartList, _id);
-
-  const formattedPrice = price.toLocaleString("en-IN", {
-    style: "currency",
-    currency: "INR",
-    maximumFractionDigits: 0,
-  });
-
-  const formattedOriginalPrice = originalPrice.toLocaleString("en-IN", {
-    style: "currency",
-    currency: "INR",
-    maximumFractionDigits: 0,
-  });
 
   const handleAddToCart = (inStock) => {
     if (token) {
@@ -89,7 +78,8 @@ export default function ProductCard(product) {
         <span>{company[0].toUpperCase() + company.slice(1)}</span>
         <div className={classes["price-container"]}>
           <p>
-            {formattedPrice} <span>{formattedOriginalPrice}</span>
+            {getFormattedValue(price)}{" "}
+            <span>{getFormattedValue(originalPrice)}</span>
           </p>
           <p className={classes["discount-label"]}>
             {`(${Math.floor(

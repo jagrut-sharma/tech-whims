@@ -7,10 +7,12 @@ import classes from "./Checkout.module.css";
 import CheckoutAddCard from "../../components/CheckoutAddCard/CheckoutAddCard";
 import AddressForm from "../../components/Addresses/AddressForm";
 import { useImmer } from "use-immer";
-import { defaultFormValues } from "../../utils/contants";
+import { defaultFormValues, toastConfig } from "../../utils/contants";
 import { ACTIONS } from "../../utils/actions";
 import { clearCart } from "../../services/cartServices";
 import { useAuth } from "../../context/AuthContext";
+import { getFormattedValue } from "../../utils/getFormattedPrice";
+import { toast } from "react-toastify";
 
 export default function Checkout() {
   const [selectedAdd, setSelectedAdd] = useState(null);
@@ -46,43 +48,21 @@ export default function Checkout() {
     0
   );
 
-  const formattedTotalPrice = totalPrice.toLocaleString("en-IN", {
-    style: "currency",
-    currency: "INR",
-    maximumFractionDigits: 0,
-  });
-
-  const formattedDiscountPrice = totalDiscount.toLocaleString("en-IN", {
-    style: "currency",
-    currency: "INR",
-    maximumFractionDigits: 0,
-  });
-
   const delivery = 100;
-  const deliveryCharge = delivery.toLocaleString("en-IN", {
-    style: "currency",
-    currency: "INR",
-    maximumFractionDigits: 0,
-  });
-
   const finalPrice = totalPrice - totalDiscount + delivery;
-  const formattedFinalPrice = finalPrice.toLocaleString("en-IN", {
-    style: "currency",
-    currency: "INR",
-    maximumFractionDigits: 0,
-  });
 
   const handleOrderPlacement = (finalPrice) => {
     console.log(finalPrice);
     if (selectedAdd) {
-      // Successful
-      console.log("Successfull");
       dataDispatch({ type: ACTIONS.CLEAR_CART });
       setSelectedAdd(null);
       clearCart(cartList, dataDispatch, token, setIsDisabled, true);
+      toast.success("Order Placed", toastConfig);
+      navigate("/");
     } else {
       // show error to select address
       console.log("Select an address first");
+      toast.error("Address not provided", toastConfig);
     }
   };
 
@@ -122,17 +102,17 @@ export default function Checkout() {
         <h3>Price Details</h3>
         <div className={classes["price-details-container"]}>
           <p>
-            Price: <span>{formattedTotalPrice}</span>
+            Price: <span>{getFormattedValue(totalPrice)}</span>
           </p>
           <p>
-            Discount: <span>{formattedDiscountPrice}</span>
+            Discount: <span>{getFormattedValue(totalDiscount)}</span>
           </p>
           <p>
-            Delivery Charge: <span>{deliveryCharge}</span>
+            Delivery Charge: <span>{getFormattedValue(delivery)}</span>
           </p>
 
           <p className={classes["total"]}>
-            Total Price: <span>{formattedFinalPrice}</span>
+            Total Price: <span>{getFormattedValue(finalPrice)}</span>
           </p>
 
           <button

@@ -4,3 +4,8 @@
   min-height: 100vh;
   position: relative;
 }
+
+.toast-container {
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+}

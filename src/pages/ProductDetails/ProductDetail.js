@@ -14,6 +14,7 @@ import {
   removeFromWishlist,
 } from "../../services/wishlistService";
 import { addToCart } from "../../services/cartServices";
+import { getFormattedValue } from "../../utils/getFormattedPrice";
 
 export default function ProductDetail() {
   const { productID } = useParams();
@@ -52,18 +53,6 @@ export default function ProductDetail() {
 
   const inWishlist = isPresentInWishlist(wishlist, _id);
   const inCart = isPresentInCart(cartList, _id);
-
-  const formattedPrice = price.toLocaleString("en-IN", {
-    style: "currency",
-    currency: "INR",
-    maximumFractionDigits: 0,
-  });
-
-  const formattedOriginalPrice = originalPrice.toLocaleString("en-IN", {
-    style: "currency",
-    currency: "INR",
-    maximumFractionDigits: 0,
-  });
 
   const handleCart = (inStock) => {
     if (token) {
@@ -123,7 +112,8 @@ export default function ProductDetail() {
                 } reviews)`}</p>
               </div>
               <p className={classes["price"]}>
-                {formattedPrice} <span>{formattedOriginalPrice}</span>
+                {getFormattedValue(price)}{" "}
+                <span>{getFormattedValue(originalPrice)}</span>
               </p>
               <p>
                 <span>Description:</span> {description}

@@ -8,6 +8,8 @@ import {
   useSearchParams,
 } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import { toast } from "react-toastify";
+import { toastConfig } from "../../utils/contants";
 // import UserProfile from "./UserProfile";
 
 export default function Authentication() {
@@ -47,6 +49,7 @@ export default function Authentication() {
       }
 
       handleLogin(encodedToken, user);
+      toast.success("Logged in", toastConfig);
       navigate(redirectPath, { replace: true });
     } catch (err) {
       console.log("In catch");
