@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { BsFillStarFill } from "react-icons/bs";
 import { AiFillHeart } from "react-icons/ai";
 
@@ -25,6 +25,7 @@ export default function ProductDetail() {
     dataState: { wishlist, cartList },
   } = useDataContext();
   const { token } = useAuth();
+  const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -73,7 +74,7 @@ export default function ProductDetail() {
         addToCart(dataDispatch, product, token, setIsDisabled);
       }
     } else {
-      navigate("/auth");
+      navigate("/auth", { state: { path: location.pathname } });
     }
   };
 
@@ -85,7 +86,7 @@ export default function ProductDetail() {
         addToWishlist(dataDispatch, token, product, setIsDisabled);
       }
     } else {
-      navigate("/auth");
+      navigate("/auth", { state: { path: location.pathname } });
     }
   };
 
@@ -134,7 +135,7 @@ export default function ProductDetail() {
                 onClick={() => handleCart(inStock)}
                 disabled={isDisabled}
               >
-                {inCart ? "Move to Cart" : "Add to Cart"}
+                {inCart ? "Go to Cart" : "Add to Cart"}
               </button>
             </div>
           </div>

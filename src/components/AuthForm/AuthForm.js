@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useLocation, useSearchParams } from "react-router-dom";
 import { GrView } from "react-icons/gr";
 import { MdVisibilityOff } from "react-icons/md";
 
@@ -17,6 +17,7 @@ export default function AuthForm({ handleFormSubmit, err, setErr }) {
     password: "",
     confirmPassword: "",
   });
+  const location = useLocation();
 
   const handleChange = (e) => {
     setFormData((draft) => {
@@ -169,6 +170,7 @@ export default function AuthForm({ handleFormSubmit, err, setErr }) {
             <Link
               to={`?mode=${isSignup ? "login" : "signup"}`}
               onClick={handleModeSwitch}
+              state={{ path: location.state?.path }}
             >
               {isSignup ? "Login" : "Signup"}
             </Link>

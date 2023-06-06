@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { AiFillStar } from "react-icons/ai";
 import { AiFillHeart } from "react-icons/ai";
+import { useLocation } from "react-router-dom";
 
 import classes from "./ProductCard.module.css";
 import { Link, useNavigate } from "react-router-dom";
@@ -21,6 +22,7 @@ export default function ProductCard(product) {
   } = useDataContext();
 
   const { token } = useAuth();
+  const location = useLocation();
   const navigate = useNavigate();
 
   const {
@@ -59,7 +61,7 @@ export default function ProductCard(product) {
         addToCart(dataDispatch, product, token, setIsDisabled);
       }
     } else {
-      navigate("/auth");
+      navigate("/auth", { state: { path: location.pathname } });
     }
   };
 
@@ -71,7 +73,7 @@ export default function ProductCard(product) {
         addToWishlist(dataDispatch, token, product, setIsDisabled);
       }
     } else {
-      navigate("/auth");
+      navigate("/auth", { state: { path: location.pathname } });
     }
   };
 
@@ -116,7 +118,7 @@ export default function ProductCard(product) {
         onClick={() => handleAddToCart(inStock)}
         disabled={isDisabled}
       >
-        {inCart ? "Move to Cart" : "Add to Cart"}
+        {inCart ? "Go to Cart" : "Add to Cart"}
       </button>
 
       <button
