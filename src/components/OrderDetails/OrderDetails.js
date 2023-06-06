@@ -1,8 +1,10 @@
 import React from "react";
 
 import classes from "./OrderDetails.module.css";
+import { useNavigate } from "react-router-dom";
 
 export default function OrderDetails({ cartList }) {
+  const navigate = useNavigate();
   const totalPrice = cartList.reduce((total, { price }) => total + price, 0);
 
   const formattedTotalPrice = totalPrice.toLocaleString("en-IN", {
@@ -29,7 +31,13 @@ export default function OrderDetails({ cartList }) {
         Total Price: <span>{formattedTotalPrice}</span>
       </p>
 
-      <button>Checkout</button>
+      <button
+        onClick={() => {
+          navigate("/checkout");
+        }}
+      >
+        Checkout
+      </button>
     </div>
   );
 }

@@ -1,0 +1,26 @@
+.addrs-card-container {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem 0;
+  background-color: var(--filter-bar-color);
+  padding: 0.5rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.active-addrs-container {
+  background-color: rgba(66, 148, 76, 0.7);
+}
+
+.addrs-card-container p {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+}
+
+.addrs-card-container input,
+.addrs-card-container label {
+  cursor: pointer;
+}
+
+.addrs-card-container input {
+  accent-color: var(--fourth-color);
+}

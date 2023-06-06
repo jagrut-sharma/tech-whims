@@ -15,6 +15,7 @@ import ProductDetail from "./pages/ProductDetails/ProductDetail";
 import ProductRootLayout from "./pages/ProductRoot/ProductRootLayout";
 import Addresses from "./components/Addresses/Addresses";
 import ProfileRootLayout from "./pages/ProfileRoot/ProfileRootLayout";
+import Checkout from "./pages/Checkout/Checkout";
 
 const router = createBrowserRouter([
   {
@@ -77,6 +78,14 @@ const router = createBrowserRouter([
             element: <Addresses />,
           },
         ],
+      },
+      {
+        path: "checkout",
+        element: (
+          <RequireAuth>
+            <Checkout />
+          </RequireAuth>
+        ),
       },
       {
         path: "mockman",

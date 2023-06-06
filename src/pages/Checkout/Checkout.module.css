@@ -1,0 +1,105 @@
+.checkout-container {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  margin-top: 2.5rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.address-container {
+  min-width: 20rem;
+  max-width: 30rem;
+}
+
+.checkout-container > div > h3 {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.new-addrs-container {
+  background-color: var(--filter-bar-color);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.add-address {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--primary-color);
+  gap: 0.5rem;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.add-address:active {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2) inset,
+    0 6px 20px 0 rgba(0, 0, 0, 0.19) inset;
+}
+
+.price-details-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1rem;
+  min-width: 21rem;
+  padding: 1rem;
+  background-color: var(--filter-bar-color);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.price-details-container p {
+  margin: 0;
+}
+
+.price-details-container > p {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  font-weight: bold;
+}
+
+.price-details-container > p > span {
+  font-weight: normal;
+}
+
+.price-details-container > p:nth-last-child(3) {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--gray-shade);
+}
+
+.price-details-container > p.total {
+  justify-content: center;
+  color: var(--dark-green);
+  font-size: 1rem;
+}
+
+.price-details-container > p.total span {
+  color: var(--fourth-color);
+  font-weight: bold;
+  margin-left: 1rem;
+}
+
+.place-order {
+  background-color: var(--tertiary-color);
+  color: var(--primary-color);
+  font: inherit;
+  font-weight: bold;
+  padding: 0.5rem 0.75rem;
+  margin: 0.5rem 0 0;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 750px) {
+  .checkout-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+    margin-top: 2.5rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+}
