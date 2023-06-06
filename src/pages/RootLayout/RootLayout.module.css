@@ -9,3 +9,8 @@
   font-family: "Montserrat", sans-serif;
   font-weight: bold;
 }
+
+.loader {
+  color: var(--dark-green);
+  z-index: 100000;
+}

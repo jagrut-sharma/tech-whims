@@ -20,6 +20,8 @@ export default function Checkout() {
   const [formValue, setFormValue] = useImmer(defaultFormValues);
   const [isDisabled, setIsDisabled] = useState(false);
 
+  const { user } = useAuth();
+
   const {
     dataState: { cartList, addressList },
     dataDispatch,
@@ -54,15 +56,67 @@ export default function Checkout() {
   const handleOrderPlacement = (finalPrice) => {
     console.log(finalPrice);
     if (selectedAdd) {
-      dataDispatch({ type: ACTIONS.CLEAR_CART });
-      setSelectedAdd(null);
-      clearCart(cartList, dataDispatch, token, setIsDisabled, true);
-      toast.success("Order Placed", toastConfig);
-      navigate("/");
+      displayRazorpay();
     } else {
       // show error to select address
       console.log("Select an address first");
       toast.error("Address not provided", toastConfig);
+    }
+  };
+
+  const loadScript = async (url) => {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = url;
+
+      script.onload = () => {
+        resolve(true);
+      };
+
+      script.onerror = () => {
+        resolve(false);
+      };
+
+      document.body.appendChild(script);
+    });
+  };
+
+  const displayRazorpay = async () => {
+    if (selectedAdd) {
+      const res = await loadScript(
+        "https://checkout.razorpay.com/v1/checkout.js"
+      );
+
+      if (!res) {
+        toast.error("Razorpay SDK failed to load");
+        return;
+      }
+
+      const options = {
+        key: "rzp_test_GabLTKSfXzan0S",
+        amount: finalPrice * 100,
+        currency: "INR",
+        name: "Tech Whims",
+        description: "Thank you for shopping with us",
+        handler: function (response) {
+          dataDispatch({ type: ACTIONS.CLEAR_CART });
+          setSelectedAdd(null);
+          clearCart(cartList, dataDispatch, token, setIsDisabled, true);
+          // Popper();
+          toast.success("Order Placed", toastConfig);
+          navigate("/");
+        },
+        prefill: {
+          name: `${user["name" || "firstName"]}`,
+          email: user?.email,
+          contact: "9696009211",
+        },
+        theme: {
+          color: "#208854",
+        },
+      };
+      const paymentObject = new window.Razorpay(options);
+      paymentObject.open();
     }
   };
 

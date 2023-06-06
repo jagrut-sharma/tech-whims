@@ -34,7 +34,7 @@ export default function ProductDetail() {
   }, []);
 
   if (!product) {
-    return <h1>Loading.....</h1>;
+    return <></>;
   }
 
   const {

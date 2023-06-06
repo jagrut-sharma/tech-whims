@@ -18,9 +18,7 @@ export default function Home() {
   if (isError) {
     element = <ErrorElement statusCode={"404"} message={isError.message} />;
   } else {
-    element = loader ? (
-      <h1>Loading....</h1>
-    ) : (
+    element = !loader && (
       <div className={classes["body-container"]}>
         <div className={classes.body}>
           <section className={classes.section}>
