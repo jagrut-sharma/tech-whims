@@ -63,5 +63,5 @@ $ npm start
 ### Responsive design:
 
 ![image](./src/assets/readme-screenshots/home-responsive.png)
-![image](<./src/assets/readme-screenshots/mobile%20(1).png>)
+![image](<./src/assets/readme-screenshots/Product-responsive.png)
 ![image](./src/assets/readme-screenshots/filter-responsive.png)
