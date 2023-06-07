@@ -35,6 +35,7 @@ $ npm start
   - User Signup
   - User Login
 - Fully Responsive
+- Search Debouncing
 
 ## **Built with -**
 
