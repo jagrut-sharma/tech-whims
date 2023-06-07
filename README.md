@@ -2,6 +2,12 @@
     
 # Tech Whims
   An Ecommerce website to buy all the tech products on your daily whims
+
+  <a href="https://www.loom.com/share/039e6fc9db1d40b3813df21178accdb7">
+    <p>Exploring Tech Whims 🛍️ | Ecommerce - Watch Video</p>
+    <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/039e6fc9db1d40b3813df21178accdb7-with-play.gif">
+  </a>
+
 </div>
 
 ## **How to install and run locally ?**
